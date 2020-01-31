@@ -1,0 +1,49 @@
+{
+  "pages": [
+    "pages/my/my",
+    "pages/businessRegister/register",
+    "pages/shop/shop",
+    "pages/home/home",
+    "pages/menu/menu",
+    "pages/location/location",
+    "pages/order/order"
+  ],
+  "window": {
+    "navigationBarTitleText": "在线点餐",
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#33CC33"
+  },
+  "tabBar": {
+    "color": "#272636",
+    "selectedColor": "#33CC33",
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "iconPath": "/images/home.png",
+        "selectedIconPath": "/images/home-selected.png",
+        "color": "white",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/order/order",
+        "iconPath": "/images/order.png",
+        "selectedIconPath": "/images/order-selected.png",
+        "text": "订单"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "iconPath": "/images/my-off.png",
+        "selectedIconPath": "/images/my-on.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  }
+}

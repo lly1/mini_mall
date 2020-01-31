@@ -1,0 +1,42 @@
+<view class="container">
+  <view class="header">
+      <image wx:if='{{userInfo}}' mode="aspectFit" class="profile" src="{{userInfo.avatarUrl}}">
+      </image>
+      <view wx:if='{{userInfo}}'>
+        <view style="margin-bottom:5rpx;color:#FFFFFF;font-size:40rpx" type="text" value='{{userInfo.nickName}}' disabled="disabled">{{userInfo.nickName}}</view>
+      </view>
+      <view wx:if='{{!userInfo}}'>
+        <button style='margin-bottom:30rpx;color:#FFFFFF;font-size:58rpx' class='weui-btn mini-btn' plain='true' size='mini' open-type='getUserInfo' bindgetuserinfo='userInfoHandle'>
+          请登陆
+        </button>
+      </view>
+  </view>
+  <view class="content">
+    <block wx:if="{{userInfo}}">
+      <navigator url="/pages/order-list/index">
+        <view class="menu-item">
+          <view class="l">我的订单</view>
+          <image class="next" src="/images/system/next.png"></image>
+        </view>
+      </navigator>
+      <view class="space"></view>
+      <navigator wx:if="{{userInfo.roleId != 1}}" url="/pages/businessRegister/register">
+        <view class="menu-item">
+          <view class="l">成为商家</view>
+          <image class="next" src="/images/system/next.png"></image>
+        </view>
+      </navigator>
+      <navigator wx:else url="/pages/shop/shop">
+        <view class="menu-item">
+          <view class="l">我的店铺</view>
+          <image class="next" src="/images/system/next.png"></image>
+        </view>
+      </navigator>
+    </block>
+    <view class="space"></view>
+
+    <view class="address">我的收货地址</view>
+    <view class="tel">客服电话: 101-097-77</view>
+    <view class="signOut">退出账号</view>
+  </view>
+</view>

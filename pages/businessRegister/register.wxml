@@ -1,0 +1,16 @@
+<view class="title">手机号注册</view>
+<view wx:if="{{!success}}">
+	<view class="row">
+	    <view class="info">
+	        <input  class= "info-input" bindinput="handleInputPhone" placeholder="请输入你的手机号" />
+	    </view>
+		<button class = "button" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" style="background-color:{{color}}" >{{text}}</button>
+	</view>
+	<button class="submit" bindtap="submit">注册</button>
+</view>
+<view class = "success" wx:if="{{success}}">
+	<view class="cheer">
+	 	<icon type="success" size="24"/> 恭喜您注册成功!
+	</view>
+	<button type="default" class="return" bindtap="return_home">返回首页</button>
+</view>
