@@ -1,0 +1,113 @@
+page{
+  font-family: "微软雅黑";
+  height: 100%;
+  width: 100%;
+  background: #ECECEC;
+}
+.map-prompt {
+  width: 420rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 24rpx;
+  color: #707070;
+  text-align: center;
+  background: #fff;
+  border-radius: 10rpx;
+  box-shadow: 0 0 10rpx rgba(0,0,0,0.1);
+  position: absolute;
+  bottom: 40rpx;
+  left: 50%;
+  transform: translate(-50%,0);
+}
+.reload {
+  width: 80rpx;
+  height: 80rpx;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 10rpx rgba(0,0,0,0.1);
+  position: absolute;
+  bottom: 30rpx;
+  right: 30rpx;
+}
+.reload .center1 {
+  width: 30rpx;
+  height: 30rpx;
+  border: 1rpx solid #33CC33;
+  border-radius: 50%;
+  margin: 24rpx auto;
+}
+.reload .center2 {
+  width: 25rpx;
+  height: 25rpx;
+  background: #33CC33;
+  border-radius: 50%;
+  margin: 3rpx auto;
+}
+.current-site-icon {
+  width: 50rpx;
+  height: 50rpx;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.near-list {
+  height: 650rpx;
+  padding-bottom: 100rpx;
+  box-sizing: border-box;
+  background: #fff;
+}
+.near-item {
+  line-height: 40rpx;
+  padding: 30rpx 50rpx 30rpx 90rpx;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  position: relative;
+}
+.current-site {
+  font-size: 40rpx;
+  color: #33CC33;
+  position: absolute;
+  top: 40rpx;
+  left: 30rpx;
+}
+.near-item .title {
+  color: #282828;
+  font-size: 32rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.near-item .add {
+  color: #707070;
+  font-size: 24rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.near-item .title1 {
+  color: #33CC33;
+}
+.near-item .add1 {
+  color: #33CC33;
+}
+.bottom-box {
+  width: 100%;
+  padding: 20rpx;
+  background: #fff;
+  box-sizing: border-box;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 88;
+  overflow: hidden;
+}
+.bottom-box button{
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  border: none;
+  background: #33CC33;
+  color: #fff;
+  font-size: 36rpx;
+}

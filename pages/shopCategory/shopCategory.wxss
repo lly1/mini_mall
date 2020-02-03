@@ -1,0 +1,26 @@
+page{
+   background: #FFFFFF ;
+}
+/* flex重新构建菜单 */
+.menu-item {
+  height: 104rpx;
+  padding: 0 32rpx;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.menu-item .l {
+  font-size:34rpx;
+  color:#333;
+  line-height:104rpx;
+}
+.menu-item .next {
+  width: 40rpx;
+  height: 40rpx;
+}
+.space {
+  width: 100vw;
+  height: 3rpx;
+  background: #E0E0E0;
+}

@@ -1,19 +1,19 @@
 <view class="content">
-	<navigator url="/pages/shopInfo/shopInfo">
+	<navigator url="/pages/order-list/index">
         <view class="menu-item">
           <view class="l">店铺基本信息</view>
           <image class="next" src="/images/system/next.png"></image>
         </view>
 	</navigator>
 	<view class="space"></view>
-	<navigator url="/pages/shopCategory/shopCategory">
+	<navigator url="/pages/order-list/index">
         <view class="menu-item">
           <view class="l">店铺类目</view>
           <image class="next" src="/images/system/next.png"></image>
         </view>
 	</navigator>
 	<view class="space"></view>
-	<navigator url="/pages/shopProduct/shopProduct">
+	<navigator url="/pages/order-list/index">
         <view class="menu-item">
           <view class="l">店铺商品</view>
           <image class="next" src="/images/system/next.png"></image>
