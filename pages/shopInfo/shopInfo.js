@@ -1,41 +1,75 @@
 var app = getApp();
 var uploadFileUrl = app.basePath + "upPic";
+var util = require('../../utils/util.js')
 Page({
   data: {
-    shop:null,
-    latitude:null,
-    longitude:null
+    id:null,
+    logo:null,
+    shopLogo:null,
+    shopName:null,
+    openTime:null,
+    shopInfo:null,
+    longitude:null,
+    latitude:null
   },
   onLoad: function (options) {
-    
+    var that = this;
+    util.requestUrl({
+      url: '/api/shop/getShopInfo',
+      params: {
+        userId: app.globalData.userInfo.id,
+      },
+      method: "POST"
+    })
+    .then(res => {
+      var data = res.data;
+      that.setData({
+        id: data.id,
+        logo: app.basePath + data.shopLogo,//显示图片用
+        shopLogo: data.shopLogo,//存储数据用
+        shopName: data.shopName,
+        openTime: data.openTime,
+        shopInfo: data.shopInfo,
+        longitude: data.longitude,
+        latitude: data.latitude
+      })
+    })
   },
   saveshop: function (e) {
+    if(!this.data.longitude){
+      wx.showToast({
+        title: '请选择地址',
+        image: '/images/system/error.png',
+        duration: 1000
+      });
+      return;
+    }
     var that = this;
-    var rztype = that.data.rztype;
     console.log(e.detail.value);
     var fdata = e.detail.value;
     wx.request({
       url: app.basePath + '/api/shop/saveShopInfo',
       method: 'post',
       data: {
-        uid: app.globalData.userInfo.id,
-        logo: that.data.uplogo,
-        shopname: fdata.shopname,
-        digest: fdata.digest
+        userId: app.globalData.userInfo.id,
+        id: that.data.id,
+        shopLogo : that.data.shopLogo,
+        shopName : fdata.shopName,
+        openTime : fdata.openTime,
+        shopInfo : fdata.shopInfo,
+        longitude : that.data.longitude,
+        latitude : that.data.latitude
       },
       header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'cookie': 'JSESSIONID='+ app.globalData.token
       },
       success: function (res) {
         wx.showToast({
           title: res.data.message,
         })
-        if (res.data.status == 1) {
+        if (res.data.code == '0000') {
           wx.redirectTo({
-            url: '../examine/examine?rztype=' + rztype,
-            success: function (res) { },
-            fail: function (res) { },
-            complete: function (res) { },
+            url: '/pages/shop/shop',
           })
         }
       },
@@ -57,23 +91,25 @@ Page({
       success: function (res) {
         console.log('chooseImage success, temp path is', res.tempFilePaths)
         var imageSrc = res.tempFilePaths[0];
-
         wx.uploadFile({
           url: uploadFileUrl,
           filePath: imageSrc,
-          name: 'data',
+          method: 'post',
+          name: 'file',
+          header: {
+            'cookie': 'JSESSIONID='+ app.globalData.token
+          },
           success: function (res) {
             console.log('uploadImage success, res is:', res)
-
             wx.showToast({
               title: '上传成功',
               icon: 'success',
               duration: 1000
             })
-
+            var rtnPath = res.data;
             self.setData({
               logo: imageSrc,
-              uplogo:res.data
+              shopLogo: rtnPath.replace(/\"/g,'')
             })
           },
           fail: function ({errMsg}) {

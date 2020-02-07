@@ -197,7 +197,8 @@ Page({
     let prevPage = pages[pages.length - 2]; 
     //console.log(this.data.centerData)
     prevPage.setData({
-      storeAddress: this.data.centerData.title
+      longitude: this.data.longitude,
+      latitude: this.data.latitude
     })
     wx.navigateBack({
       delta: 1

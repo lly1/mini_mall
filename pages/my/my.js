@@ -9,8 +9,7 @@ Page({
   data: {
     mesheight: {},
     meswidth: {},
-    userInfo: null,
-    roleId: null
+    userInfo: null
   },
 
   /**

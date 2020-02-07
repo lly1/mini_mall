@@ -19,40 +19,42 @@
 <text style="margin-right:20rpx">推荐Logo尺寸512*512</text>  
 </view>
 <form bindsubmit="saveshop">
-<!--店铺名字-->
-<view class="shopstore">
-    <view class="shopstore_log">
-      <text class="textinput">店铺名字:</text>
-      <input placeholder-class='placeholder' placeholder-style='font-size:26rpx;' class="in" name="shopname" value="{{shopname}}"/>
-    </view>
-    <view  class="xian"></view>
-</view>
-<view class="shopstore">
-    <view class="shopstore_log">
-      <text class="textinput">营业时间:</text>
-      <input placeholder-class='placeholder' placeholder-style='font-size:26rpx;' class="in" name="openTime" value="{{openTime}}"/>
-    </view>
-    <view  class="xian"></view>
-</view>
-<view class="shopstore">
-    <view class="shopstore_log">
-      <button class="location" hover-class='button-hover' bindtap="selectLocation">选择门店地址</button>
-    </view>
-</view>
-
-<view class="tishi">
-<text style="margin-right:20rpx">店铺名字不能重名，不能使用他人的注册商标</text>  
-</view>
-
-
-  <view class="section">
-
-  <view class="jieshang" >店铺介绍</view>
-    <view  class="xian"></view>
-    <textarea placeholder-style='font-size:28rpx;' style="font-size:30rpx" maxlength='150' placeholder="请介绍你的店铺(150字以内)" name="digest" value="{{digest}}"/>
+  <!--店铺名字-->
+  <view class="shopstore">
+      <view class="shopstore_log">
+        <text class="textinput">店铺名字:</text>
+        <input placeholder-class='placeholder' placeholder-style='font-size:26rpx;' class="in" name="shopName" value="{{shopName}}"/>
+      </view>
+      <view  class="xian"></view>
+  </view>
+  <view class="shopstore">
+      <view class="shopstore_log">
+        <text class="textinput">营业时间:</text>
+        <input placeholder-class='placeholder' placeholder-style='font-size:26rpx;' class="in" name="openTime" value="{{openTime}}"/>
+      </view>
+      <view  class="xian"></view>
+  </view>
+  <view class="shopstore">
+      <view class="shopstore_log">
+      <input type="hidden" name="longitude" value="{{longitude}}" style="display:none"/>
+      <input type="hidden" name="latitude" value="{{latitude}}" style="display:none"/>
+        <button class="location" hover-class='button-hover' bindtap="selectLocation">选择门店地址</button>
+      </view>
   </view>
 
- <button style="margin-top:50rpx;" form-type="submit" hover-class='button-hover' class='location'>保存并下一步</button>
+  <view class="tishi">
+  <text style="margin-right:20rpx">店铺名字不能重名，不能使用他人的注册商标</text>  
+  </view>
+
+
+    <view class="section">
+
+    <view class="jieshang" >店铺介绍</view>
+      <view  class="xian"></view>
+      <textarea placeholder-style='font-size:28rpx;' style="font-size:30rpx" maxlength='150' placeholder="请介绍你的店铺(150字以内)" name="shopInfo" value="{{shopInfo}}"/>
+    </view>
+
+  <button style="margin-top:50rpx;" form-type="submit" hover-class='button-hover' class='location'>保存</button>
 
 </form>
 

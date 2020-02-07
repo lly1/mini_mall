@@ -80,7 +80,7 @@ const requestUrl=({
      header: header,
      success: (res) => {
        wx.hideLoading();
-       if (res.data.result === 'error' || res['statusCode']!==200) {
+       if (res.data.succress === 'error' || res['statusCode']!==200) {
          wx.showToast({
            title: res.data.msg || '请求出错',
            icon: 'none',

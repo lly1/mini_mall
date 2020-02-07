@@ -61,21 +61,22 @@ Page({
       util.requestUrl({
         url: 'api/user/businessRegister',
         params: {
-          id: getApp().globalData.userInfo.id,
+          id: app.globalData.userInfo.id,
           phone: phone
         },
-        method: "POST"})
-        .then(res => {
-          wx.showToast({
-            title: '提交成功~',
-            icon: 'loading',
-            duration: 1000
-          })
-          app.globalData.userInfo = res.data;
-          that.setData({
-            success: true
-          })
+        method: "POST"
+      })
+      .then(res => {
+        wx.showToast({
+          title: '提交成功~',
+          icon: 'loading',
+          duration: 1000
         })
+        app.globalData.userInfo = res.data;
+        that.setData({
+          success: true
+        })
+      })
     }
   },
   /**
