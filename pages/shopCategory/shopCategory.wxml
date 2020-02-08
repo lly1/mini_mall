@@ -1,23 +1,23 @@
-<view class="content">
-	<navigator url="/pages/order-list/index">
-        <view class="menu-item">
-          <view class="l">店铺基本信息</view>
-          <image class="next" src="/images/system/next.png"></image>
-        </view>
-	</navigator>
-	<view class="space"></view>
-	<navigator url="/pages/order-list/index">
-        <view class="menu-item">
-          <view class="l">店铺类目</view>
-          <image class="next" src="/images/system/next.png"></image>
-        </view>
-	</navigator>
-	<view class="space"></view>
-	<navigator url="/pages/order-list/index">
-        <view class="menu-item">
-          <view class="l">店铺商品</view>
-          <image class="next" src="/images/system/next.png"></image>
-        </view>
-	</navigator>
-	<view class="space"></view>
+<import src="/template/category/category.wxml" />
+<view class="container">
+    <view class="menu-item" wx:for-items="{{categoryList}}" wx:key="{{index}}"
+          bindtap="editCategory"
+          data-id="{{item.id}}"
+          data-name="{{item.categoryName}}"
+          data-index="{{index}}"
+          class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}"
+          bindtouchstart="touchstart" bindtouchmove="touchmove"
+          >
+
+          <view class="content">
+            {{item.categoryName}}
+          </view>
+          <!-- <image class="next" src="/images/system/next.png"></image> -->
+          <view class="del" catchtap="del" data-id="{{item.id}}">删除</view>
+    </view>
+    <view class="bottom-box" bindtap="addCategory">
+      <image src="/images/system/add.png" />
+      <view class="add-btn">新增商品类目</view>
+    </view>
 </view>
+<template is="category" data="{{hide: hide,categoryName: categoryName}}" />

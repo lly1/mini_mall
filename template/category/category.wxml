@@ -1,0 +1,15 @@
+<template name="category">
+  <view class="category" hidden="{{hide}}">
+    <view class="s-b">
+      <view class="s-l-b">
+        <text>填写类目名称</text>
+      </view>
+      <view class="s-l-b">
+        <input name="categoryName" value="{{categoryName}}" bindinput="inputName"/>
+      </view>
+      <view class="xian"></view>
+      <button class="l" open-type="getUserInfo" bindgetuserinfo="saveCategory">保存</button>
+      <button class="c" bindtap="cancel" type="default">关闭</button>
+    </view>
+  </view>
+</template>

@@ -24,7 +24,6 @@ Page({
     })
     .then(res => {
       var fdata = res.data;
-      app.globalData.shopId = fdata.id
       that.setData({
         shopId: fdata.id,
         shopCategory: fdata.tShopCategory,

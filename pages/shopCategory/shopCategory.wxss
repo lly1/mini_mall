@@ -1,26 +1,76 @@
+@import "/template/category/category.wxss"; /*引入template样式*/
+
 page{
-   background: #FFFFFF ;
-}
-/* flex重新构建菜单 */
-.menu-item {
-  height: 104rpx;
-  padding: 0 32rpx;
-  background: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.menu-item .l {
-  font-size:34rpx;
-  color:#333;
-  line-height:104rpx;
-}
-.menu-item .next {
-  width: 40rpx;
-  height: 40rpx;
+  background: #FFFFFF ;
+  font-family: "微软雅黑";
+  
 }
 .space {
   width: 100vw;
   height: 3rpx;
   background: #E0E0E0;
 }
+.bottom-box{
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  font-size:28rpx;
+  color:#000000;
+  border-top: 1rpx solid #E0E0E0;
+  height:100rpx;
+  line-height: 100rpx;
+  background-size: 15rpx auto;
+  display: flex;
+  align-items: center;
+}
+.bottom-box .add-btn{
+  margin-left: 17%;
+  padding-left: 50rpx;
+  background-size: 40rpx auto;
+  font-size:34rpx;
+  color:#333;
+}
+.bottom-box image{
+  width: 11%;
+  height: 80%;
+  margin-left: 27rpx;
+}
+.touch-item {
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom:1px solid #E0E0E0;
+  width: 100%;
+  overflow: hidden;
+  height: 104rpx;
+ }
+ .content {
+  width: 100%;
+  line-height: 104rpx;
+  margin-right:0;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  -webkit-transform: translateX(90px);
+  transform: translateX(90px);
+  margin-left: -75px;
+  font-size:34rpx;
+  color:#333;
+ }
+ .del {
+  background-color: orangered;
+  width: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  -webkit-transform: translateX(90px);
+  transform: translateX(90px);
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+ }
+ .touch-move-active .content,
+ .touch-move-active .del {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+ }

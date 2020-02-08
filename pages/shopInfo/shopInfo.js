@@ -3,14 +3,14 @@ var uploadFileUrl = app.basePath + "upPic";
 var util = require('../../utils/util.js')
 Page({
   data: {
-    id:null,
-    logo:null,
-    shopLogo:null,
-    shopName:null,
-    openTime:null,
-    shopInfo:null,
-    longitude:null,
-    latitude:null
+    id:'',
+    logo:'',
+    shopLogo:'',
+    shopName:'',
+    openTime:'',
+    shopInfo:'',
+    longitude:'',
+    latitude:''
   },
   onLoad: function (options) {
     var that = this;
@@ -64,14 +64,22 @@ Page({
         'cookie': 'JSESSIONID='+ app.globalData.token
       },
       success: function (res) {
+        console.info(res)
+        app.globalData.shopId = res.data.data.id;
         wx.showToast({
           title: res.data.message,
-        })
-        if (res.data.code == '0000') {
-          wx.redirectTo({
-            url: '/pages/shop/shop',
+          duration: 1000
+        });
+        setTimeout(() => {
+          let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
+          let prevPage = pages[pages.length - 2]; 
+          prevPage.setData({
+            shopId: res.data.data.id
           })
-        }
+          wx.navigateBack({
+            delta: 1
+          })
+        }, 1000);
       },
       error: function (e) {
         wx.showToast({

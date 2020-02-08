@@ -25,8 +25,9 @@ App({
   },
   globalData: {
     userInfo: null,
-    token:null,
-    session_key:null,
+    token: null,
+    session_key: null,
+    shopId: null,
     appid: 'wx4d256cf6c5b4ecd0',
     secret: 'c4904a87f6bbc23c9b069c99495ca230'
   },

@@ -6,18 +6,22 @@
         </view>
 	</navigator>
 	<view class="space"></view>
-	<navigator url="/pages/shopCategory/shopCategory">
-        <view class="menu-item">
-          <view class="l">店铺类目</view>
-          <image class="next" src="/images/system/next.png"></image>
-        </view>
-	</navigator>
-	<view class="space"></view>
-	<navigator url="/pages/shopProduct/shopProduct">
-        <view class="menu-item">
-          <view class="l">店铺商品</view>
-          <image class="next" src="/images/system/next.png"></image>
-        </view>
-	</navigator>
-	<view class="space"></view>
+  <block wx:if="{{shopId}}">
+    <navigator url="/pages/shopCategory/shopCategory">
+          <view class="menu-item">
+            <view class="l">店铺类目</view>
+            <image class="next" src="/images/system/next.png"></image>
+          </view>
+    </navigator>
+	  <view class="space"></view>
+  </block>
+  <block wx:if="{{shopId && shopCategory}}">
+    <navigator url="/pages/shopProduct/shopProduct">
+          <view class="menu-item">
+            <view class="l">店铺商品</view>
+            <image class="next" src="/images/system/next.png"></image>
+          </view>
+    </navigator>
+    <view class="space"></view>
+  </block>
 </view>
