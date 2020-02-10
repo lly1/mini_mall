@@ -1,4 +1,3 @@
-var meheight = 0;
 var app = getApp();
 var util = require('../../utils/util.js')
 Page({
@@ -7,8 +6,7 @@ Page({
    */
   data: {
     shopId: null,
-    shopCategory: null,
-    shopProduct: null
+    shopCategory: null
   },
    /**
    * 生命周期函数--监听页面加载
@@ -24,12 +22,17 @@ Page({
     })
     .then(res => {
       var fdata = res.data;
-      app.globalData.shopId = fdata.id
-      that.setData({
-        shopId: fdata.id,
-        shopCategory: fdata.tShopCategory,
-        shopProduct: fdata.tShopProduct
-      })
+      if(fdata){
+        app.globalData.shopId = fdata.id
+        that.setData({
+          shopId: fdata.id,
+          shopCategory: fdata.tShopCategory
+        })
+      }else{
+        that.setData({
+          shopId: null,
+        })
+      }
     })
   },
   /**

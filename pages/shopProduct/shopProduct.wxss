@@ -1,26 +1,158 @@
 page{
-   background: #FFFFFF ;
+  background: #FFFFFF ;
+  font-family: "微软雅黑";
+  
 }
-/* flex重新构建菜单 */
-.menu-item {
-  height: 104rpx;
-  padding: 0 32rpx;
-  background: #fff;
+.container{
+  position: absolute;
+  width: 100%;
+  height: 100%;
   display: flex;
-  justify-content: space-between;
+  transform: translate(0%, 0px) translateZ(0px);
+}
+.orderPage-sideBar{
+  height: 100%;
+  width: 180rpx;
+  border-right: 2rpx solid #E0E0E0;
+}
+.menuList{
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
-.menu-item .l {
-  font-size:34rpx;
-  color:#333;
-  line-height:104rpx;
+.menuList .menu{
+  height: 100rpx;
+  width: 130rpx;
+  position: relative;
+  text-align: center;
+  line-height: 100rpx;
+  font-size: 28rpx;
+  border-bottom: 1rpx dashed #E0E0E0; 
 }
-.menu-item .next {
-  width: 40rpx;
-  height: 40rpx;
+.selected.menu::before{
+  content: "";
+  position: absolute;
+  left: -10rpx;
+  top: 32rpx;
+  height: 36rpx;
+  width: 7rpx;
+  background: #33CC33;
+}
+.foodList{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.foodList .title{
+  padding: 38rpx;
+  height: 25rpx;
+  line-height: 25rpx;
+  font-size: 27rpx;
+  border-bottom: 1px solid #E0E0E0;
+}
+.food{
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 170rpx;
+  border-bottom: 1rpx solid #E0E0E0; 
+  background: white;
+}
+.food::before{
+  content: "";
+  width: 15rpx;
+  height: 100%;
+  left: -15rpx;
+  top: 0;
+  border: 1px solid white;
+}
+.food .img{
+  width: 120rpx;
+  height: 120rpx;
+}
+.food-info{
+  padding-left: 15rpx;
+  line-height: 48rpx;
+  flex: 1;
+}
+.food .name{
+  font-size: 30rpx;
+}
+.food .sales{
+  font-size: 25rpx;
+  color: #ACACAC;
+}
+.food .price{
+  font-size: 30rpx;
+  color: red;
 }
 .space {
   width: 100vw;
   height: 3rpx;
   background: #E0E0E0;
 }
+.bottom-box{
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  font-size:28rpx;
+  background-color:#FFFFFF;
+  border-top: 1rpx solid #E0E0E0;
+  height:100rpx;
+  line-height: 100rpx;
+  background-size: 15rpx auto;
+  display: flex;
+  align-items: center;
+}
+.bottom-box .add-btn{
+  margin-left: 17%;
+  padding-left: 50rpx;
+  background-size: 40rpx auto;
+  font-size:34rpx;
+  color:#333;
+}
+.bottom-box image{
+  width: 11%;
+  height: 80%;
+  margin-left: 47rpx;
+}
+.touch-item {
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom:1px solid #E0E0E0;
+  width: 100%;
+  overflow: hidden;
+ }
+ .content {
+  width: 100%;
+  line-height: 104rpx;
+  margin-right:0;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  -webkit-transform: translateX(90px);
+  transform: translateX(90px);
+  margin-left: -75px;
+  font-size:34rpx;
+  color:#333;
+ }
+ .del {
+  background-color: orangered;
+  width: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  -webkit-transform: translateX(90px);
+  transform: translateX(90px);
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  height: 100%;
+ }
+ .touch-move-active .content,
+ .touch-move-active .del {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+ }

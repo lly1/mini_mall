@@ -1,0 +1,65 @@
+
+<!--商品发布-->
+<form bindsubmit="saveProduct">
+  <!--上传图片-->
+  <view class="log">
+    <view class="log_s">商品图片：</view>
+    <view class="log_o"> </view>
+    <view class="log_g">
+      <block wx:if="{{iconShow}}">
+        <view class="cl_img">
+          <image src="{{iconShow}}" mode="aspectFit"  bindtap="icon"></image>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="cl_img">
+          <image src="/images/system/upload.png" bindtap="icon"></image>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view class="space"></view>
+  <!--商品名称-->
+  <view class='menu-item'>
+    <text class="l">商品名称:</text>
+    <input class="inputForm" name="name" type='text' value='{{name}}'></input>
+  </view>
+  <view class="space"></view>
+  <!--商品价格-->
+  <view class='menu-item'>
+    <text class="l">商品价格:</text>
+    <input class="inputForm" name="price" type='number' value='{{price}}'></input>
+  </view>
+  <view class="space"></view>
+  <!--商品库存-->
+  <view class='menu-item'>
+    <text class="l">商品库存:</text>
+    <input class="inputForm" name="stock" type='text' value='{{stock}}'></input>
+  </view>
+  <view class="space"></view>
+  <!--商品类别-->
+  <view class='menu-item'>
+    <text class="l">商品类别:</text>
+    <picker style="width:510rpx;" name="category" mode="selector" range="{{categoryList}}" range-key="categoryName" value="{{index}}" bindchange="category">
+      <input class="inputForm" name="category" type='text' value='{{categoryList[categoryIndex].categoryName}}' disabled='true'></input>
+    </picker>
+    <image class="next" src="/images/system/next.png"></image>
+  </view>
+  <view class="space"></view>
+  <!--商品状态-->
+  <view class='menu-item'>
+    <text class="l">商品状态:</text>
+    <picker style="width:510rpx;" name="status" mode="selector" range="{{status}}" range-key="name" value="{{statusInd}}" bindchange="status">
+        <input class="inputForm" name="status" type='text' value='{{status[statusIndex].name}}'disabled='true'></input>
+    </picker>
+    <image class="next" src="/images/system/next.png"></image>
+  </view>
+  <view class="space"></view>
+  <!--商品介绍-->
+  <view class="section">
+    <view class="jieshang" >商品介绍:</view>
+      <view  class="xian"></view>
+      <textarea placeholder-style='font-size:28rpx;' style="font-size:30rpx" maxlength='150' placeholder="请介绍你的商品(150字以内)" name="info" value="{{info}}"/>
+  </view>
+  <button style="margin-top:50rpx;" form-type="submit" hover-class='button-hover' class='location'>保存</button>
+</form>

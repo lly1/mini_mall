@@ -1,5 +1,4 @@
-<scroll-view class="container"
-scroll-y="true">
+<scroll-view class="container" scroll-y="true">
   <block wx:for="{{orderList}}" wx:key="">
     <view class="orderList">
       <view class="order-title">

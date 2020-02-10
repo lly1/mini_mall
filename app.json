@@ -6,6 +6,7 @@
     "pages/shopInfo/shopInfo",
     "pages/shopCategory/shopCategory",
     "pages/shopProduct/shopProduct",
+    "pages/addProduct/addProduct",
     "pages/map/map",
     "pages/home/home",
     "pages/menu/menu",

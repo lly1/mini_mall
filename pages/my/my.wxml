@@ -34,9 +34,15 @@
       </navigator>
     </block>
     <view class="space"></view>
-
-    <view class="address">我的收货地址</view>
-    <view class="tel">客服电话: 101-097-77</view>
-    <view class="signOut">退出账号</view>
+    <navigator url="/pages/order-list/index">
+        <view class="menu-item">
+          <view class="l">帮助和反馈</view>
+          <image class="next" src="/images/system/next.png"></image>
+        </view>
+    </navigator>
+    <view class="space"></view>
+    <view class="menu-item">
+          <view class="l">客服电话：18972654160</view>
+    </view>
   </view>
 </view>

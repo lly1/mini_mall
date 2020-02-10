@@ -121,14 +121,14 @@ Page({
     angle = that.angle({ X: startX, Y: startY }, { X: touchMoveX, Y: touchMoveY });
     that.data.categoryList.forEach(function (v, i) {
     v.isTouchMove = false
-    //滑动超过30度角 return
-    if (Math.abs(angle) > 30) return;
-    if (i == index) {
-      if (touchMoveX > startX) //右滑
-      v.isTouchMove = false
-      else //左滑
-      v.isTouchMove = true
-    }
+      //滑动超过30度角 return
+      if (Math.abs(angle) > 30) return;
+      if (i == index) {
+        if (touchMoveX > startX) //右滑
+        v.isTouchMove = false
+        else //左滑
+        v.isTouchMove = true
+      }
     })
     //更新数据
     that.setData({

@@ -1,0 +1,101 @@
+page{
+   background: #FFFFFF ;
+}
+/* flex重新构建菜单 */
+.inputForm {
+  padding-left: 50rpx;
+  font-size:34rpx;
+  color:#333;
+}
+.menu-item {
+  height: 104rpx;
+  padding: 0 32rpx;
+  background: #fff;
+  display: flex;
+  align-items: center;
+}
+.menu-item .l {
+  font-size:34rpx;
+  color:#333;
+  line-height:104rpx;
+}
+.menu-item .next {
+  width: 40rpx;
+  height: 40rpx;
+}
+.space {
+  width: 100vw;
+  height: 3rpx;
+  background: #E0E0E0;
+}
+/*店铺*/
+.log {
+  display: flex;
+  background: #fff;
+  align-content: center;
+  height: 150rpx;
+}
+
+.log_s {
+  height: 150rpx;
+  line-height: 150rpx;
+  flex: 1;
+  font-size:34rpx;
+  color:#333;
+  padding-left: 32rpx;
+}
+
+.cl_img {
+  width: 150rpx;
+  height: 150rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left:150rpx;
+}
+
+.cl_img image {
+  width: 150rpx;
+  height: 150rpx;
+
+}
+.log_o{
+  flex: 1
+}
+.log_g{
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+.location{
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 28rpx;
+}
+button{
+  background: #33CC33;
+  color: #fff;
+  width: 80%;
+  font-size: 34rpx;
+}
+.section{
+  background: #fff
+}
+.xian{
+  width: 90%;
+  background: #E0E0E0;
+  height: 3rpx;
+  margin-left:25rpx; 
+}
+.jieshang{
+  margin-left:32rpx; 
+  padding: 20rpx 0;
+  font-size: 32rpx;
+
+}
+textarea{
+  height: 200rpx;
+  width: 100%;
+  padding: 32rpx;
+}

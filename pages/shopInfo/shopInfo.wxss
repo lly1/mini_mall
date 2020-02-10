@@ -62,7 +62,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left:200rpx;
+  margin-left:150rpx;
 }
 
 .cl_img image {
@@ -112,6 +112,7 @@
   width: 90%;
   background: #ECECEC;
   height: 3rpx;
+  margin-left:25rpx; 
 }
 .jieshang{
   margin-left:30rpx; 
@@ -119,18 +120,9 @@
   font-size: 32rpx;
 
 }
-.xian{
-  margin-left:25rpx; 
-}
 textarea{
   width: 100%;
-  margin-left: 20rpx;
-}
-button{
-  background: #33CC33;
-  color: #fff;
-  width: 80%;
-  font-size: 34rpx;
+  padding: 32rpx;
 }
 .textinput{
   display: flex;
@@ -142,4 +134,10 @@ button{
   height: 70rpx;
   line-height: 70rpx;
   font-size: 28rpx;
+}
+button{
+  background: #33CC33;
+  color: #fff;
+  width: 80%;
+  font-size: 34rpx;
 }
