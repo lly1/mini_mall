@@ -23,16 +23,18 @@ Page({
     })
     .then(res => {
       var data = res.data;
-      that.setData({
-        id: data.id,
-        logo: app.basePath + data.shopLogo,//显示图片用
-        shopLogo: data.shopLogo,//存储数据用
-        shopName: data.shopName,
-        openTime: data.openTime,
-        shopInfo: data.shopInfo,
-        longitude: data.longitude,
-        latitude: data.latitude
-      })
+      if(data){
+        that.setData({
+          id: data.id,
+          logo: app.basePath + data.shopLogo,//显示图片用
+          shopLogo: data.shopLogo,//存储数据用
+          shopName: data.shopName,
+          openTime: data.openTime,
+          shopInfo: data.shopInfo,
+          longitude: data.longitude,
+          latitude: data.latitude
+        })
+      }
     })
   },
   saveshop: function (e) {

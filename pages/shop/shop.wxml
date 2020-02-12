@@ -15,7 +15,7 @@
     </navigator>
 	  <view class="space"></view>
   </block>
-  <block wx:if="{{shopId && shopCategory}}">
+  <block wx:if="{{shopId && shopCategory.length > 0}}">
     <navigator url="/pages/shopProduct/shopProduct">
           <view class="menu-item">
             <view class="l">店铺商品</view>

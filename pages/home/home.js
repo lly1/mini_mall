@@ -1,139 +1,55 @@
 // pages/home/home.js
+var util = require('../../utils/util.js')
+// 引入SDK核心类
+var app = getApp();
+var QQMapWX = require('../../libs/qqmap-wx-jssdk.js');
+var qqmapsdk;
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
-    characteristicList:[{
-      text: "免配送费"
-    },{
-      text: "0元起送"
-    },{
-      text: "新商家"
-    },{
-      text: "品牌商家"
-    },{
-      text: "跨天预定"
-    }],
-    sortList:[{
-      sort: "综合排序",
-      image:"",
-    }, {
-      sort: "速度最快",
-      image: "",
-    }, {
-      sort: "评分最高",
-      image: "",
-    }, {
-      sort: "起送价最低",
-      image: "",
-    }, {
-      sort: "配送费最低",
-      image: "",
-    }],
-    discountList:[{
-      icon: "减",
-      iconColor: "#FF635B", 
-      text: "满减优惠"
-    },{
-      icon: "领",
-      iconColor: "#FF7298", 
-      text: "进店领券"
-    },{
-      icon: "返",
-      iconColor: "#FB4343", 
-      text: "满返代金券"
-    },{
-      icon: "折",
-      iconColor: "#C183E2", 
-      text: "折扣商品"
-    },{
-      icon: "订",
-      iconColor: "#6FDF64", 
-      text: "提前下单优惠"
-    },{
-      icon: "赠",
-      iconColor: "#FDC41E", 
-      text: "满赠活动"
-    },{
-      icon: "免",
-      iconColor: "#43B697", 
-      text: "满免配送"
-    }],
-    categoryList:{
-      pageone:[{
-        name: "美食",
-        src: "/images/icon/1.png"
-      }, {
-        name: "甜点饮品",
-        src: "/images/icon/2.png"
-      }, {
-        name: "美团超市",
-        src: "/images/icon/3.png"
-      }, {
-        name: "正餐精选",
-        src: "/images/icon/4.png"
-      }, {
-        name: "生鲜果蔬",
-        src: "/images/icon/5.png"
-      }, {
-        name: "全部商家",
-        src: "/images/icon/6.png"
-      }, {
-        name: "免配送费",
-        src: "/images/icon/7.png"
-      }, {
-        name: "新商家",
-        src: "/images/icon/8.png"
-      }],
-      pagetwo: [{
-        name: "美食",
-        src: "/images/icon/1.png"
-      }, {
-        name: "甜点饮品",
-        src: "/images/icon/2.png"
-      }, {
-        name: "美团超市",
-        src: "/images/icon/3.png"
-      }, {
-        name: "正餐精选",
-        src: "/images/icon/4.png"
-      }, {
-        name: "生鲜果蔬",
-        src: "/images/icon/5.png"
-      }, {
-        name: "全部商家",
-        src: "/images/icon/6.png"
-      }, {
-        name: "免配送费",
-        src: "/images/icon/7.png"
-      }, {
-        name: "新商家",
-        src: "/images/icon/8.png"
-      }]
-    },
-    selected: 0,
-    mask1Hidden: true,
-    mask2Hidden: true,
+    basePath: app.basePath,
+    shopList: [],
+    categoryList:[],
+    selected: 2,
     animationData: "",
-    location: "",
+    location: '',
+    longitude: '',
+    latitude: '',
     characteristicSelected: [false,false,false,false,false,false,false],
     discountSelected:null,
     selectedNumb: 0,
-    sortSelected: "综合排序"
+    pageNo: 1,
+    pageSize: 10
   },
   finish: function () {
     var that = this;
-    wx.request({
-      url: "https://www.easy-mock.com/mock/596257bc9adc231f357c4664/restaurant/filter",
-      method: "GET",
-      success: function (res) {
+    // wx.request({
+    //   url: "https://www.easy-mock.com/mock/596257bc9adc231f357c4664/restaurant/filter",
+    //   method: "GET",
+    //   success: function (res) {
+    //     that.setData({
+    //       restaurant: res.data.data.restaurant,
+    //     })
+    //   }
+    // });
+    util.requestUrl({
+      url: '/api/shop/getShopList',
+      params: {
+        pageNo: that.data.pageNo,
+        pageSize: that.data.pageSize,
+      },
+      method: "POST"
+    })
+    .then(res => {
+      var data = res.data;
+      if(data){
         that.setData({
-          restaurant: res.data.data.restaurant,
+          shopList: data
         })
       }
-    });
+    })
   },
   sortSelected: function (e) {
     var that = this;
@@ -178,35 +94,62 @@ Page({
     }
   },
   onTapTag: function (e) {
+    console.info(e);
     this.setData({
       selected: e.currentTarget.dataset.index
     });
-  },
-  mask1Cancel: function () {
-    this.setData({
-      mask1Hidden: true
-    })
-  },
-  mask2Cancel: function () {
-    this.setData({
-      mask2Hidden: true
-    })
-  },
-  onOverallTag: function () {
-    this.setData({
-      mask1Hidden: false
-    })
-  },
-  onFilter: function () {
-    this.setData({
-      mask2Hidden: false
-    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    var that = this;
+    // 实例化API核心类
+    qqmapsdk = new QQMapWX({
+      key: 'LZBBZ-ARJEX-U7J4D-72K42-3SNKH-E5BLU'
+    });
+    wx.getLocation({
+      type: 'gcj02',
+      altitude: false,
+      success: (res)=>{
+        console.info(res);
+        const la = res.latitude;
+        const lo = res.longitude;
+        that.setData({ 
+          longitude: lo,
+          latitude: la
+        });
+        qqmapsdk.reverseGeocoder({
+          location:{
+            latitude: la,
+            longitude: lo
+          },
+          success: function(res){
+            console.log(la,lo);
+            var res = res.result;
+            that.setData({ 
+              location: res.address,
+            });
+          },
+          fail: function(error) {
+            console.error(error);
+            wx.hideLoading({});
+            wx.showToast({
+              title: '定位失败',
+              icon: 'none',
+              duration: 1500
+            })
+          }
+        });
+      },
+      fail: (res)=>{
+        console.error(res);
+        wx.showToast({
+          title: 授权失败,
+        })
+      },
+      complete: ()=>{}
+    });
   },
 
   /**
@@ -221,18 +164,42 @@ Page({
    */
   onShow: function () {
     var that = this;
-    wx.request({
-      url: "https://www.easy-mock.com/mock/596257bc9adc231f357c4664/restaurant/info",
-      method: "GET",
-      success: function (res) {
-        that.setData({
-          restaurant: res.data.data.restaurant,
-          location: wx.getStorageSync('location')
+    wx.getLocation({
+      type: 'gcj02',
+      altitude: false,
+      success: (res)=>{
+        console.info(res);
+        const la = res.latitude;
+        const lo = res.longitude;
+        that.setData({ 
+          longitude: lo,
+          latitude: la
+        });
+        util.requestUrl({
+          url: '/sale/shop/getShopList'+that.data.selected,
+          params: {
+            pageNo: that.data.pageNo,
+            pageSize: that.data.pageSize,
+            longitude: that.data.longitude,
+            latitude: that.data.latitude
+          },
+          method: "POST"
+        })
+        .then(res => {
+          var data = res.data;
+          if(data){
+            that.setData({
+              shopList: data.records
+            })
+          }
         })
       }
-    });
+    })
+    
   },
-
+  lower: function (e){
+    console.info(e)
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */

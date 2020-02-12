@@ -133,7 +133,6 @@
   margin: 10rpx;
   width: 250rpx;
   height: 40rpx;
-  background: white;
   color: white;
   border-radius: 20rpx;
 }
@@ -168,22 +167,9 @@
   height: 350rpx;
   border-bottom:20rpx solid #f4f4f4; 
 }
-.category-info{
-  display: inline-block;
-  text-align: center;
-  position: relative;
-  margin-top: 20rpx;
-  height: 150rpx;
-  width: 25%;
-}
-.category-image{
-  width: 95rpx;
-  height: 95rpx;
-}
-.category-text{
-  font-size: 25rpx;
+.showImg{
+  height: 100%;
   width: 100%;
-  line-height: 30rpx
 }
 .header-title{
   text-align: center;
@@ -216,7 +202,7 @@
   color: black;
   font-weight: 800;
 }
-.restaurants-list{
+.shop-list{
   font-size: 25rpx;
   display: flex;
   width: 100%;
@@ -225,41 +211,41 @@
   color: #6D6D6D;
   justify-content: space-between;
 }
-.restaurants-info-name{
+.shop-info-name{
   color: black;
   font-size: 30rpx;
   margin-bottom: 10rpx;
 }
-.restaurants-image{
+.shop-image{
   width: 200rpx;
   height: 125rpx;
   margin: 20rpx;
 }
-.restaurants-info{
+.shop-info{
   margin: 15rpx;
   flex: 1;
 }
-.restaurants-distribution{
+.shop-distribution{
   display: flex;
   width: 100rpx;
   margin-right:20rpx; 
 }
-.restaurants-info-rating{
+.shop-info-rating{
   display: flex;
   width: 300rpx;
   height: 50rpx;
   line-height: 50rpx;
 }
-.restaurants-info-rating-stars{
+.shop-info-rating-stars{
   color: #33CC33;
   width: 130rpx;
   height: 50rpx;
 }
-.restaurants-info-rating-sales{
+.shop-info-rating-sales{
   width: 150rpx;
   height: 50rpx;
 }
-.restaurants-distribution{
+.shop-distribution{
   flex-direction: column;
   text-align: right;
   justify-content: center;

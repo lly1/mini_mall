@@ -1,3 +1,10 @@
+<view class="top">
+  <view class="search-box">
+    <view class="region">当前位置</view>
+    <view class="shu"></view>
+    <input readonly value="{{address}}" ></input>
+  </view>
+</view>
 <!--地图容器-->
 <!--longitude及latitude为设置为调转到指定坐标位置，默认不显示-->
 <map id="myMap"

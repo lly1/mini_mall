@@ -1,22 +1,16 @@
 <template name="sort_list">
   <view class="sort-list">
-      <view class="sort"
-      bindtap="onOverallTag">{{sortSelected}}
-      <image src="/images/down.png" 
-      style="width:20rpx;height:20rpx;"></image></view>
-      <view data-index="0"
-      bindtap="onTapTag" 
-      class="sort {{selected == 0?'sort-active':''}}">
+      <view data-index="0" class="sort {{selected == 0?'sort-active':''}}" bindtap="defaultSelect">
+          默认排序
+      </view>
+      <view data-index="1" bindtap="selectBySale" class="sort {{selected == 1?'sort-active':''}}">
         销量最高
       </view>
-      <view data-index="1"
-      bindtap="onTapTag" 
-      class="sort {{selected == 1?'sort-active':''}}">
+      <view data-index="2" bindtap="selectByDistance" class="sort {{selected == 2?'sort-active':''}}">
         距离最近
       </view>
-      <view class="sort"
-      bindtap="onFilter">筛选
-      <image src="/images/screen.png" 
-      style="width:22rpx;height:22rpx;"></image></view>
+      <view data-index="3" class="sort {{selected == 3?'sort-active':''}}" bindtap="selectByStar">
+        评分最高
+      </view>
   </view>
 </template>

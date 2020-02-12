@@ -1,4 +1,3 @@
-var meheight = 0;
 var app = getApp();
 var util = require('../../utils/util.js')
 // 引入SDK核心类
@@ -12,6 +11,7 @@ Page({
     nearList:[],
     latitude:null,
     longitude:null,
+    address: '',
     selectedId: 0,
     currentRegion: {
       province: '选择城市',
@@ -53,6 +53,7 @@ Page({
               longitude: lo,
               currentRegion: res.address_component,
               keyword: that.data.defaultKeyword,
+              address: that.data.address
             });
             //调用接口
             that.nearby_search();
@@ -96,10 +97,36 @@ Page({
             latitude: res.latitude,
             longitude: res.longitude,
           })
+          that.getAddress(res.latitude,res.longitude);
           that.nearby_search();
         }
       })
     } 
+  },
+  getAddress: function(la,lo){
+    var that = this;
+    qqmapsdk.reverseGeocoder({
+      location:{
+        latitude: la,
+        longitude: lo
+      },
+      success: function(res){
+        console.log(la,lo);
+        var res = res.result;
+        that.setData({ 
+          address: res.address
+        });
+      },
+      fail: function(error) {
+        console.error(error);
+        wx.hideLoading({});
+        wx.showToast({
+          title: '定位失败',
+          icon: 'none',
+          duration: 1500
+        })
+      }
+    });
   },
   //点击选择地图下方列表某项
   chooseCenter: function (e) {
@@ -112,6 +139,7 @@ Page({
           centerData: this.data.nearList[i],
           latitude: this.data.nearList[i].latitude,
           longitude: this.data.nearList[i].longitude,
+          address: this.data.nearList[i].addr,
         });
         this.addMarker(this.data.nearList[id]);
         return;
@@ -143,7 +171,7 @@ Page({
       currentRegion: {
         province: data.province,
         city: data.city,
-        district: data.district,
+        district: data.district 
       },
     })
     wx.hideLoading();
@@ -185,18 +213,18 @@ Page({
         self.addMarker(sug[0]);
       },
       fail: function (res) {
-        //console.log(res);
+        console.log(res);
       },
       complete: function (res) {
-        //console.log(res);
+        console.log(res);
       }
     });
   },//确认选择地址
   selectedOk: function () {
     let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
     let prevPage = pages[pages.length - 2]; 
-    //console.log(this.data.centerData)
     prevPage.setData({
+      location: this.data.address,
       longitude: this.data.longitude,
       latitude: this.data.latitude
     })
