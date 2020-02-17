@@ -1,4 +1,4 @@
-<import src = "../common/orderPage.wxml"/>
+<import src = "../common/shopOrderPage.wxml"/>
 <view class="header">
     <block wx:for="{{swiperTitle}}" wx:key="">
       <view class="title {{index==currentPage?'selected':''}}" data-index="{{index}}"
@@ -8,12 +8,9 @@
 <swiper class="swiper" current="{{currentPage}}"
   bindchange="turnTitle">
   <swiper-item  item-id="">
-    <template is="orderPage" data="{{orderList,basePath,currentPage,hide,rtnCode}}"/>
+    <template is="shopOrderPage" data="{{orderList,basePath,currentPage,hide,rtnCode}}"/>
   </swiper-item>
   <swiper-item  item-id="">
-    <template is="orderPage" data="{{orderList,basePath,currentPage}}"/>
-  </swiper-item>
-  <swiper-item  item-id="">
-    <template is="orderPage" data="{{orderList,basePath,currentPage}}"/>
+    <template is="shopOrderPage" data="{{orderList,basePath,currentPage}}"/>
   </swiper-item>
 </swiper>

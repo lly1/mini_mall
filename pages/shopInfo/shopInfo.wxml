@@ -48,7 +48,6 @@
 
 
   <view class="section">
-
     <view class="jieshang" >店铺介绍</view>
       <view  class="xian"></view>
       <textarea placeholder-style='font-size:28rpx;' style="font-size:30rpx" maxlength='150' placeholder="请介绍你的店铺(150字以内)" name="shopInfo" value="{{shopInfo}}"/>

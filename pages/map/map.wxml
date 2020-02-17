@@ -11,7 +11,7 @@
     style="width:100%;height:300px;"
     longitude="{{longitude}}"
     latitude="{{latitude}}" scale="16" bindregionchange="mapChange" show-location>
-    <cover-view class="map-prompt">您可拖动地图, 标记店铺准确位置</cover-view>
+    <cover-view class="map-prompt">您可拖动地图, 标记准确位置</cover-view>
     <cover-image class="current-site-icon" src="/images/system/placeholder.png"></cover-image>
     <cover-view class="reload" bindtap="reload">
       <cover-view class="center1">

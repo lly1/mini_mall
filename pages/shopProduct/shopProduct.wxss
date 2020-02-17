@@ -27,7 +27,10 @@ page{
   text-align: center;
   line-height: 100rpx;
   font-size: 28rpx;
-  border-bottom: 1rpx dashed #E0E0E0; 
+  border-bottom: 3rpx dashed #E0E0E0; 
+}
+.two{
+  line-height: 50rpx!important;
 }
 .selected.menu::before{
   content: "";
@@ -117,14 +120,7 @@ page{
   height: 80%;
   margin-left: 47rpx;
 }
-.touch-item {
-  font-size: 14px;
-  display: flex;
-  justify-content: space-between;
-  border-bottom:1px solid #E0E0E0;
-  width: 100%;
-  overflow: hidden;
- }
+/* 左滑删除 */
  .content {
   width: 100%;
   line-height: 104rpx;
@@ -136,6 +132,14 @@ page{
   margin-left: -75px;
   font-size:34rpx;
   color:#333;
+ }
+ .touch-item {
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom:1px solid #E0E0E0;
+  width: 100%;
+  overflow: hidden;
  }
  .del {
   background-color: orangered;

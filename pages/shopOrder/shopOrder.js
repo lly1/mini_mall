@@ -7,25 +7,20 @@ Page({
    */
   data: {
     swiperTitle: [{
-      text: "全部订单",
+      text: "待处理",
       id: 0
     },{
-      text: "未支付",
+      text: "已完成订单",
       id: 1
-    },{
-      text: "未评价",
-      id: 2
     }],
     currentPage: 0,
     basePath: app.basePath,
     orderList: [],
-    rtnCode: null,
-    hide: true,
     pageNo: 1,
     pageSize: 10,
     more: 1, //是否还有未加载数据
-    startX: 0, //开始坐标
-    startY: 0
+    rtnCode: null,
+    hide: true
   },
   showCode: function (e){
     this.setData ({
@@ -33,27 +28,26 @@ Page({
       rtnCode: e.currentTarget.dataset.rtncode
     })
   },
-  goToPay: function (e){
-    wx.navigateTo({
-      url: '/pages/pay/pay?orderId='+e.currentTarget.dataset.orderid
+  cancel() {
+    this.setData({
+      hide: true
     })
   },
-  buyAgain: function (e){
+  accept: function (e){
     var that = this;
-    wx.request({
-      url: app.basePath + "/api/order/buyAgain",
-      data: JSON.stringify(e.currentTarget.dataset.detail),
-      method: "POST",
-      header: {
-        'cookie': 'JSESSIONID='+ app.globalData.token
+    util.requestUrl({
+      url: '/api/order/acceptOrder',
+      params: {
+        id: e.currentTarget.dataset.orderid,
       },
-      success: function (res) {
-        if(res.data.data == 'success'){
-          wx.navigateTo({
-            url: '/pages/menu/menu?shopId='+e.currentTarget.dataset.shopid,
-          });
-        }
-      },
+      method: "POST"
+    })
+    .then(res => {
+      console.info(res)
+      wx.showToast({
+        title: res.data,
+      });
+      that.getOrder();
     })
   },
   turnPage: function (e) {
@@ -85,7 +79,7 @@ Page({
     .then(res => {
       console.info(res)
       wx.showToast({
-        title: res.data,
+        title: res.message,
       });
       that.getOrder();
     })
@@ -97,9 +91,9 @@ Page({
         pageNo: that.data.pageNo+1
       })
       util.requestUrl({
-        url: '/api/order/getUserOrder'+that.data.currentPage,
+        url: '/api/order/getShopOrder'+that.data.currentPage,
         params: {
-          userId: app.globalData.userInfo.id,
+          shopId: app.globalData.userInfo.shop.id,
           pageNo: that.data.pageNo,
           pageSize: that.data.pageSize,
         },
@@ -127,9 +121,9 @@ Page({
   getOrder:function(){
     var that = this;
     util.requestUrl({
-      url: '/api/order/getUserOrder'+that.data.currentPage,
+      url: '/api/order/getShopOrder'+that.data.currentPage,
       params: {
-        userId: app.globalData.userInfo.id,
+        shopId: app.globalData.userInfo.shop.id,
         pageNo: that.data.pageNo,
         pageSize: that.data.pageSize,
       },
@@ -143,61 +137,6 @@ Page({
         })
       }
     })
-  },
-  touchstart: function(e) {
-    var that = this;
-    //开始触摸时 重置所有删除
-    that.data.orderList.forEach(function(v, i) {
-      if (v.isTouchMove) //只操作为true的
-        v.isTouchMove = false;
-    })
-    that.setData({
-      startX: e.changedTouches[0].clientX,
-      startY: e.changedTouches[0].clientY,
-      orderList: that.data.orderList
-    })
-  },
-  //滑动事件处理
-  touchmove: function (e) {
-    var that = this,
-    index = e.currentTarget.dataset.index,//当前索引
-    startX = that.data.startX,//开始X坐标
-    startY = that.data.startY,//开始Y坐标
-    touchMoveX = e.changedTouches[0].clientX,//滑动变化坐标
-    touchMoveY = e.changedTouches[0].clientY,//滑动变化坐标
-    //获取滑动角度
-    angle = that.angle({ X: startX, Y: startY }, { X: touchMoveX, Y: touchMoveY });
-    that.data.orderList.forEach(function (v, i) {
-      v.isTouchMove = false
-      //滑动超过30度角 return
-      if (Math.abs(angle) > 30) {
-        return;
-      }
-      if (i == index) {
-        if (touchMoveX > startX){
-          //右滑
-          v.isTouchMove = false
-        }else{
-          //左滑
-          v.isTouchMove = true
-        }
-      }
-    })
-    //更新数据
-    that.setData({
-      orderList: that.data.orderList
-    })
-  },
-  /**
-    * 计算滑动角度
-    * @param {Object} start 起点坐标
-    * @param {Object} end 终点坐标
-    */
-  angle: function (start, end) {
-    var _X = end.X - start.X,
-    _Y = end.Y - start.Y
-    //返回角度 /Math.atan()返回数字的反正切值
-    return 360 * Math.atan(_Y / _X) / (2 * Math.PI);
   },
   /**
    * 生命周期函数--监听页面加载

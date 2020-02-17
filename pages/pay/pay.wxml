@@ -1,0 +1,55 @@
+<scroll-view class="container" scroll-y="true">
+    <view class="orderList">
+      <view class="order-title">
+        <view class="order-title-restaurantName">
+          {{order.shop.shopName}}
+        </view>
+        <view class="order-title-state">
+          自提
+        </view>
+      </view>
+      <block wx:for="{{order.detailList}}" wx:key="">
+        <view class="order-content">
+            <image class="order-content-restaurantImg" src="{{basePath+item.product.productIcon}}"></image>
+              <view class="order-content-info">
+                <view class="order-content-info-name">
+                  {{item.product.productName}}
+                </view>
+                <view class="order-content-info-price">
+                  ￥{{item.product.productPrice}}
+                </view>
+                <view class="order-content-info-date">
+                  ×{{item.buyNum}}
+                </view>
+              </view>
+        </view>
+      </block> 
+      <view class="order-footer">
+        <view class="order-footer-totalPrice">小计￥</view>
+        <view class="price">{{order.payTotal}}</view>
+      </view>
+    </view>
+    <view class="orderList">
+      <view class="order-title">
+        <view class="order-title-name">
+          支付方式
+        </view>
+        <view class="order-title-payway">
+          在线支付
+        </view>
+      </view>
+      <view class="section">
+        <view class="jieshang">备注</view>
+          <view  class="xian"></view>
+          <textarea placeholder-style='font-size:28rpx;'
+           style="font-size:30rpx" maxlength='150' placeholder="特殊需求请备注" bindinput="remarks"/>
+      </view>
+    </view>
+</scroll-view>
+<view class="footer">
+      <view class="howMuch">
+        <view class="total">合计</view>
+        <view class="cost">￥{{order.payTotal}}</view>
+      </view>
+      <view class="pay" bindtap="pay">支付</view>      
+</view>

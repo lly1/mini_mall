@@ -25,28 +25,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this;
-    util.requestUrl({
-      url: '/api/shop/getShopInfo',
-      params: {
-        userId: app.globalData.userInfo.id,
-      },
-      method: "POST"
-    })
-    .then(res => {
-      var fdata = res.data;
-      if(fdata){
-        app.globalData.shopId = fdata.id
-        that.setData({
-          shopId: fdata.id,
-          shopCategory: fdata.tShopCategory
-        })
-      }else{
-        that.setData({
-          shopId: null,
-        })
-      }
-    })
+    if(app.globalData.userInfo.shop){
+      this.setData({
+        shopId: app.globalData.userInfo.shop.id,
+        shopCategory: app.globalData.userInfo.shop.tShopCategory
+      })
+    }
   },
    /**
    * 生命周期函数--监听页面卸载

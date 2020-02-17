@@ -1,16 +1,12 @@
 /* pages/order/order.wxss */
 @import "/template/code/code.wxss"; /*引入template样式*/
-/* 解决和店铺取货吗样式不一 */
-.category .s-b {
-  height: 35%;
-}
 .default{
   text-align: center;
   font-weight: 500;
   color: grey;
 }
 .swiper{
-  height: 93%;
+  height: 100%;
 }
 .header{
   display: flex;
@@ -32,6 +28,10 @@
   height: 100%;
   background-color: #fff;
   overflow-x: hidden;
+}
+.items{
+  border-bottom: 1rpx solid #ECECEC;
+  border-top: 1rpx solid #ECECEC;
 }
 .orderList{
   background-color: #fff;
@@ -82,6 +82,7 @@
 .order-content-restaurantImg{
   width: 100rpx;
   height: 80rpx;
+  margin-left: 15rpx;
 }
 .order-content-info{
   font-size: 25rpx;
@@ -149,40 +150,3 @@
   background: #33CC33;
   color: #fff;
 }
-/* 滑动删除 */
-.touch-item {
-  font-size: 14px;
-  display: flex;
-  justify-content: space-between;
-  border-bottom:1px solid #ECECEC;
-  width: 100%;
-  overflow: hidden;
- }
- .del {
-  background-color: orangered;
-  width: 90px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  -webkit-transform: translateX(90px);
-  transform: translateX(90px);
-  -webkit-transition: all 0.4s;
-  transition: all 0.4s;
- }
- .touch-move-active .items,
- .touch-move-active .del {
-  -webkit-transform: translateX(0);
-  transform: translateX(0);
- }
- .items {
-  width: 95%;
-  margin-right:0;
-  -webkit-transition: all 0.4s;
-  transition: all 0.4s;
-  -webkit-transform: translateX(90px);
-  transform: translateX(90px);
-  margin-left: -75px;
-  color:#333;
- }

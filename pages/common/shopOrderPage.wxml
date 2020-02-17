@@ -1,27 +1,19 @@
 <import src="/template/code/code.wxml" />
-<template name="orderPage">
+<template name="shopOrderPage">
     <scroll-view class="container" scroll-y="true" bindscrolltolower="lower">
       <view class="default" wx:if="{{orderList<1}}">
-          暂时没有相关订单，快去下单吧！
+          暂时没有相关订单
       </view>
-      <view wx:for="{{orderList}}" wx:key="" 
-            data-id="{{item.id}}"
-            data-index="{{index}}"
-            class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}"
-            bindtouchstart="touchstart" bindtouchmove="touchmove"
-            >
-        <view class="orderList items">
+      <view class="items" wx:for="{{orderList}}" wx:key="" data-id="{{item.id}}" data-index="{{index}}">
+        <view class="orderList">
           <view class="order-title">
             <image class="order-content-restaurantImg"src="{{basePath+item.shop.shopLogo}}"></image>
-            <navigator url="/pages/menu/menu?shopId={{item.shop.id}}" class="content">
+            <view class="content">
               <view class="order-title-restaurantName">
                 {{item.shop.shopName}}
               </view>
-              <image class="next" src="/images/system/next.png"></image>
-            </navigator>
-            <view class="order-title-state" wx:if="{{item.orderStatus==0}}">订单已提交</view>
+            </view>
             <view class="order-title-state" wx:if="{{item.orderStatus==1}}">订单已支付</view>
-            <view class="order-title-state" wx:if="{{item.orderStatus==2}}">商家已接单</view>
             <view class="order-title-state" wx:if="{{item.orderStatus==3}}">订单已完成</view>
           </view>
             <view class="order-content">       
@@ -47,14 +39,10 @@
               </view>
             </view>
           <view class="order-footer">
-            <view class="order-footer-goToComment" wx:if="{{item.orderStatus==3&&item.isRate=='0'}}">去评论</view>
-            <view class="order-footer-orderAgain" wx:if="{{item.orderStatus>0}}" bindtap="buyAgain" data-detail="{{item.detailList}}" data-shopid="{{item.shopId}}">再来一单</view>
-            <view class="pay" wx:if="{{item.orderStatus==0}}" bindtap='goToPay' data-orderid="{{item.id}}">去支付</view>
-            <view class="order-footer-orderAgain" wx:if="{{item.orderStatus==2}}" bindtap="showCode" data-rtncode="{{item.rtnCode}}">取货号</view>
-            <view class="pay" wx:if="{{item.orderStatus==2}}" bindtap='finish' data-orderid="{{item.id}}">确认收货</view>
+            <view class="order-footer-orderAgain" wx:if="{{item.orderStatus==2}}" data-rtncode="{{item.rtnCode}}" bindtap="showCode">取货号</view>
+            <view class="pay" wx:if="{{item.orderStatus==1}}" bindtap='accept' data-orderid="{{item.id}}">接单</view>
           </view>
         </view>
-        <view class="del" catchtap="del" data-id="{{item.id}}">删除</view>
       </view> 
     </scroll-view>
     <template is="code" data="{{hide,rtnCode}}" />

@@ -4,9 +4,10 @@
     scroll-y="true">
       <block wx:for="{{categoryList}}" wx:key="">
         <view class="menuList">
-          <view class="menu {{index==selected?'selected':''}}" 
-          data-index="{{index}}" 
-          catchtap="turnCategory">{{item.categoryName}}</view>
+          <view class="menu {{index==selected?'selected':''}} {{item.categoryName.length > 4?'two':''}}" 
+            data-index="{{index}}" catchtap="turnCategory">
+            {{item.categoryName}}
+          </view>
         </view>
       </block>
     </scroll-view>
@@ -19,7 +20,7 @@
             class="food touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}"
             bindtouchstart="touchstart" bindtouchmove="touchmove"
             >
-        <image class="img" src="{{basePath}}{{item.productIcon}}"></image>
+        <image class="img" src="{{basePath+item.productIcon}}"></image>
         <view class="food-info">
           <view class="name">{{item.productName}}</view>
           <view class="sales">月售 {{item.saleTotal}} 赞 {{item.starTotal}}</view>

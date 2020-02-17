@@ -1,6 +1,15 @@
-<import src = "../common/orderPage.wxml"/>
+<import src = "../common/categoryPage.wxml"/>
 <import src = "../common/commentPage.wxml"/>
 <view class="container" disable-scroll="true">
+  <view class="shopTop">
+    <view>
+      <image src="{{basePath+shop.shopLogo}}" class="shop-top-image"/>
+    </view>
+    <view class="shop-top-content">
+      <view class="shop-top-name">店铺名称：{{shop.shopName}}</view>
+      <view class="shop-top-info">店铺介绍：{{shop.shopInfo}}</view>
+    </view>
+  </view>
   <view class="header">
     <block wx:for="{{swiperTitle}}" wx:key="">
       <view class="title {{index==currentPage?'selected':''}}" data-index="{{index}}"
@@ -10,11 +19,10 @@
   <swiper class="swiper" current="{{currentPage}}"
   bindchange="turnTitle">
     <swiper-item id="orderPage">
-      <template is="orderPage" data="{{menu,selected,howMuch,cost,pullBar}}"/>
+      <template is="categoryPage" data="{{categoryList,cartList,basePath,cartStatus,selected,cost}}"/>
     </swiper-item>
     <swiper-item id="commentPage">
       <template is="commentPage" data="{{categoryList}}"/>
     </swiper-item>
-    <swiper-item id="restaurantPage"></swiper-item>
   </swiper>
 </view>

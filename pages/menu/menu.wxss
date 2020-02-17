@@ -4,6 +4,7 @@
 .header{
   display: flex;
   justify-content: space-around;
+  height: 7%;
 }
 .header .title{
   height: 70rpx;
@@ -13,11 +14,11 @@
   text-align: center;
 }
 .header .title.selected{
-  border-bottom: 7rpx solid #FFd161;
+  border-bottom: 7rpx solid #33CC33;
   font-weight: 600;
 }
 .swiper{
-  height: 1130rpx;
+  height: 83%;
 }
 #orderPage{
   display: flex;
@@ -26,13 +27,10 @@
 #commentPage{
   height: auto;
 }
-#restaurantPage{
-  background: yellow;
-}
 .orderPage-sideBar{
-  width: 150rpx;
-  height: 1130rpx;
-  background: #F4F4F4;
+  height: 100%;
+  width: 200rpx;
+  border-right: 2rpx solid #E0E0E0;
 }
 .menuList{
   display: flex;
@@ -41,12 +39,15 @@
 }
 .menuList .menu{
   height: 100rpx;
-  width: 130rpx;
+  width: 150rpx;
   position: relative;
   text-align: center;
   line-height: 100rpx;
   font-size: 28rpx;
-  border-bottom: 1rpx dashed #ECECEC; 
+  border-bottom: 3rpx dashed #E0E0E0; 
+}
+.two{
+  line-height: 50rpx!important;
 }
 .selected.menu::before{
   content: "";
@@ -55,27 +56,27 @@
   top: 32rpx;
   height: 36rpx;
   width: 7rpx;
-  background: #FFD161;
+  background: #33CC33;
 }
 .foodList{
   flex: 1;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  background: #ECECEC;
+  height: 86%;
 }
 .foodList .title{
-  padding: 15rpx;
+  padding: 38rpx;
   height: 25rpx;
   line-height: 25rpx;
-  font-size: 25rpx;
+  font-size: 27rpx;
+  border-bottom: 1px solid #E0E0E0;
 }
 .food{
   position: relative;
   display: flex;
   align-items: center;
   height: 170rpx;
-  border-bottom: 1rpx solid #ECECEC; 
+  border-bottom: 1rpx solid #E0E0E0; 
   background: white;
 }
 .food::before{
@@ -106,12 +107,16 @@
   font-size: 30rpx;
   color: red;
 }
+.space {
+  width: 100vw;
+  height: 3rpx;
+  background: #E0E0E0;
+}
 .food-numb{
   height: 40rpx;
   width: 130rpx;
   display: flex;
   justify-content: flex-end;
-  margin-top: 95rpx;
   margin-right: 30rpx;
   line-height: 40rpx;
   font-size: 25rpx;
@@ -122,11 +127,16 @@
   border-radius: 30rpx;
   text-align: center; 
 }
+.text{
+  line-height: 15rpx;
+  color: red;
+  font-size: 32rpx;
+}
 .food-numb .add{
   font-size: 35rpx;
   line-height: 37rpx;
   font-weight: 700;
-  background: #FFD161;
+  background: #33CC33;
   margin-left: 15rpx;
 }
 .food-numb .remove{
@@ -140,59 +150,7 @@
   border-color: #B0B0B0;
   color: #B0B0B0;
 }
-.footer{
-  display: flex;
-  position: absolute;
-  right: 0;
-  left: 0;
-  bottom:0;
-  height: 100rpx;
-}
-.footer .img{
-  position: absolute;
-  height: 90rpx;
-  width: 90rpx;
-  border-radius: 100rpx;
-  left: 20rpx;
-  top: -45rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-#orderPage .howMuch{
-  position: relative;
-  flex: 1;
-  font-size: 28rpx;
-  background: white;
-  line-height: 100rpx;
-  padding-left: 130rpx;
-}
-.footer .pay{
-  width: 200rpx;
-  text-align: center;
-  line-height: 100rpx;
-  color: white;
-  font-size: 30rpx;
-  background: #CCCCCC;
-}
-#orderPage .cost{
-  margin-top: 10rpx;
-  color: red;
-  font-size: 50rpx;
-  line-height: 50rpx;
-  height: 50rpx;
-  width: 100rpx;
-}
-.footer.active .free{
-   font-size: 25rpx;
-   width: 100rpx;
-   height: 40rpx;
-   line-height: 40rpx;
-}
-.footer.active .pay{
-  background: #FFD161;
-  color: black;
-}
+
 .commentPage-header{
   height: 190rpx;
   display: flex;
@@ -253,3 +211,185 @@
   border-radius: 40rpx;
   padding: 5rpx 15rpx;
 }
+/* 购物车 */
+.shopping-cart-bg{
+  background-color: #fff;
+  height: 160rpx;
+  z-index: 8;
+  position: fixed;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+.shopping-cart {
+  z-index: 9;
+  position: fixed;
+  height: 120rpx;
+  bottom: 18rpx;
+  margin: 0 30rpx;
+  right: 0;
+  left: 0;
+  border-radius: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  border: 2rpx solid rgba(236, 236, 236, 1);
+}
+
+.shopping-cart .left-box {
+  display: flex;
+  margin-left: 48rpx;
+  align-items: center;
+  width: 60%;
+}
+
+.shopping-cart .left-box .icon-wrap {
+  position: relative;
+}
+
+.shopping-cart .left-box .icon-wrap .icon-card {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.shopping-cart .left-box .icon-wrap .icon-num {
+  font-size: 32rpx;
+  min-width: 35rpx;
+  padding: 0 5rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  background-color: #33CC33;
+  position: absolute;
+  border-radius: 40rpx;
+  top: -16rpx;
+  right: -24rpx;
+  text-align: center;
+  color: #fff;
+}
+
+.shopping-cart .left-box .price {
+  color: red;
+  font-size: 36rpx;
+  margin-left: 45rpx;
+}
+
+.shopping-cart .right-box {
+  font-size: 32rpx;
+  width: 196rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: #33CC33;
+  border-radius: 44rpx;
+  text-align: center;
+  color: #4a4a4a;
+  margin-right: 10rpx;
+}
+
+/* 购物车详情 */
+.mask {
+  z-index: 0;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.cart-details .content {
+  padding: 0 30rpx;
+  z-index: 5;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  box-shadow: 0px -4rpx 20rpx 0rpx rgba(0, 0, 0, 0.11);
+}
+
+.cart-details .content .title {
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2rpx solid #eee;
+}
+
+.cart-details .content .title .left-box {
+  font-size: 28rpx;
+  color: #4a4a4a;
+}
+
+.cart-details .content .title .right-box {
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+  color: #9b9b9b;
+}
+
+.cart-details .content .title .right-box image {
+  width: 44rpx;
+  height: 44rpx;
+  margin-left: 18rpx;
+}
+
+.cart-details .content .item-wrap {
+  padding-bottom: 150rpx;
+  max-height: 600rpx;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.cart-details .content .item-wrap .item {
+  font-size: 32rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  color: #4a4a4a;
+}
+
+.cart-details .content .item-wrap .item .goods-name {
+  flex: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cart-details .content .item-wrap .item .goods-price {
+  color: red;
+  flex: 2;
+  text-align: right;
+}
+
+.cart-details .content .item-wrap .item .num-wrap {
+  flex: 4;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+/* top */
+.shopTop{
+  font-size: 28rpx;
+  display: flex;
+  width: 100%;
+  height: 10%;
+  padding: 10rpx 0;   
+  border-bottom: 1rpx solid #ECECEC;
+  background-color: #33CC33;
+}
+.shop-top-image{
+  height: 100rpx;
+  width: 100rpx;
+  margin-left: 32rpx;
+}
+.shop-top-content{
+  color: #fff;
+  margin-left: 20rpx;
+  padding: 8rpx;
+}
+.shop-top-name{
+  margin-bottom: 10rpx;
+}
+
+

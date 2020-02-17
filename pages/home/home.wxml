@@ -1,44 +1,6 @@
 <import src = "../common/sort_list.wxml"/>
-<!-- <view class="mask" hidden="{{mask1Hidden}}" bindtap="mask1Cancel">
-  <template is="sort_list" data="{{selected,sortSelected}}"/>
-  <view class="overall-sort-list">
-    <block wx:for="{{sortList}}" wx:key="">
-    <view class="overall-sort" data-index="{{index}}" 
-    bindtap="sortSelected">{{item.sort}}</view>
-    </block> 
-  </view>
-</view> -->
-<!-- <view class="mask" hidden="{{mask2Hidden}}" bindtap="mask2Cancel">
-  <template is="sort_list" data="{{selected,sortSelected}}"/>
-  <scroll-view class="filterList" scroll-y="true" >
-    <view class="filterList-characteristic-title">商家特色</view>
-    <view class="filterList-characteristic-items">
-      <block wx:for="{{characteristicList}}" wx:key="">
-        <view class="filterList-characteristic-item {{characteristicSelected[index]==true?'characteristic-selected':''}}"
-        catchtap="characteristicSelected" data-index="{{index}}">{{item.text}}</view>
-      </block>
-    </view>
-    <view class="filterList-discount-title">优惠活动(单选)</view>
-    <view class="filterList-discount-items">
-      <block wx:for="{{discountList}}" wx:key="">
-        <view class="filterList-discount-item {{discountSelected==index?'discount-selected':''}}"
-        catchtap="discountSelected" data-index="{{index}}">
-          <text class="filterList-discount-item-icon"
-          style="background:{{item.iconColor}}">{{item.icon}}</text>
-        {{item.text}}</view>
-      </block>
-    </view>
-  </scroll-view>
-  <view class="filterList-footer">
-    <view class="filterList-footer-delect"
-    catchtap="clearSelectedNumb">清除筛选</view>
-    <view class="filterList-footer-finish" bindtap="finish">完成 
-    <view class="filterList-footer-finish-number" hidden="{{selectedNumb==0}}">{{selectedNumb}}
-    </view>
-    </view>
-  </view>
-</view> -->
-<scroll-view bindscrolltolower="lower" class="scroll-shop-list" scroll-y="true" style="height:100%">
+<wxs module="filters" src="../../filter/filters.wxs"></wxs>
+<scroll-view bindscrolltolower="lower" class="scroll-shop-list" scroll-y="true" style="height:100%;overflow-x:hidden">
   <view class="heard">
     <navigator url="/pages/map/map">
       <view class="heard-location">
@@ -52,33 +14,30 @@
       鸡排
     </view>
   </view>
-  <swiper indicator-dots="true" indicator-color="rgba(228,228,228,1)" indicator-active-color="#FECA49" autoplay="{{true}}">
+  <swiper class="photoShow" indicator-dots="true" indicator-color="rgba(228,228,228,1)" indicator-active-color="#FECA49" autoplay="{{true}}">
     <swiper-item>
         <image src="/images/icon/show1.jpg" mode="aspectFill" class="showImg"/>
     </swiper-item>
     <swiper-item>
-        <image src="/images/icon/show2.jfif" mode="aspectFill" class="showImg"/>
+        <image src="/images/icon/show2.png" mode="aspectFill" class="showImg"/>
     </swiper-item>
   </swiper>
   <view class="header-title">附近商家</view>
   <template is="sort_list" data="{{selected}}"/>
     <view class="shopList">
     <block wx:for="{{shopList}}" wx:key="">
-      <navigator url="/pages/menu/menu">
+      <view bindtap="jump" data-id="{{item.id}}">
         <view class="shop-list">
           <view class="shop-info-image">
-            <image src="{{basePath}}{{item.shopLogo}}" class="shop-image"/>
+            <image src="{{basePath+item.shopLogo}}" class="shop-image"/>
           </view>
           <view class="shop-info">
             <view class="shop-info-name">{{item.shopName}}</view>
             <view class="shop-info-rating">
-              <view
-              class="shop-info-rating-stars">★ ★ ★ ★</view>
-              <view 
-              class="shop-info-rating-sales">月售 {{item.shopSale}}单</view>
+              <view class="shop-info-rating-stars">评分：{{item.shopStar}}</view>
             </view>
-            <view class="shop-info-price">
-              起送 {{item.shopSale}}¥ | 配送 {{item.shopSale}}¥
+            <view class="shop-info-rating-sales">
+                月售 {{item.shopSale}}单
             </view>
         </view>
         <view class="shop-distribution">
@@ -88,11 +47,11 @@
           </view>
           <view 
           class="shop-distribution-time">
-            {{item.distance}}分钟
+            约{{filters.toFix2(item.distance*11)}}分钟
           </view>
         </view>
        </view>
-      </navigator>
+      </view>
     </block>
   </view>
 </scroll-view>

@@ -12,92 +12,68 @@ Page({
     basePath: app.basePath,
     shopList: [],
     categoryList:[],
-    selected: 2,
-    animationData: "",
+    selected: 0,
     location: '',
     longitude: '',
     latitude: '',
-    characteristicSelected: [false,false,false,false,false,false,false],
-    discountSelected:null,
     selectedNumb: 0,
     pageNo: 1,
-    pageSize: 10
+    pageSize: 10,
+    more: 1 //是否还有未加载数据
   },
-  finish: function () {
-    var that = this;
-    // wx.request({
-    //   url: "https://www.easy-mock.com/mock/596257bc9adc231f357c4664/restaurant/filter",
-    //   method: "GET",
-    //   success: function (res) {
-    //     that.setData({
-    //       restaurant: res.data.data.restaurant,
-    //     })
-    //   }
-    // });
-    util.requestUrl({
-      url: '/api/shop/getShopList',
-      params: {
-        pageNo: that.data.pageNo,
-        pageSize: that.data.pageSize,
-      },
-      method: "POST"
-    })
-    .then(res => {
-      var data = res.data;
-      if(data){
-        that.setData({
-          shopList: data
-        })
-      }
-    })
-  },
-  sortSelected: function (e) {
-    var that = this;
-    wx.request({
-    url:"https://www.easy-mock.com/mock/596257bc9adc231f357c4664/restaurant/overAll",
-      method: "GET",
-      success: function (res) {
-        that.setData({
-          restaurant: res.data.data.restaurant,
-          sortSelected: that.data.sortList[e.currentTarget.dataset.index].sort
-        })
-      }
+  defaultSelect: function (e) {
+    this.setData({
+      selected: e.currentTarget.dataset.index,
+      pageNo: 1
     });
+    this.getShopList();
   },
-  clearSelectedNumb: function () {
+  selectBySale: function (e) {
     this.setData({
-      characteristicSelected: [false],
-      discountSelected: null,
-      selectedNumb: 0
-    })
+      selected: e.currentTarget.dataset.index,
+      pageNo: 1
+    });
+    this.getShopList();
   },
-  characteristicSelected: function (e) {
-    var info = this.data.characteristicSelected;
-    info[e.currentTarget.dataset.index] = !info[e.currentTarget.dataset.index];
+  selectByDistance: function (e) {
     this.setData({
-      characteristicSelected: info,
-      selectedNumb: this.data.selectedNumb + (info[e.currentTarget.dataset.index]?1:-1)
-    })
-    console.log(e.currentTarget.dataset.index);
+      selected: e.currentTarget.dataset.index,
+      pageNo: 1
+    });
+    this.getShopList();
   },
-  discountSelected: function (e) {
-    if (this.data.discountSelected != e.currentTarget.dataset.index){
-      this.setData({
-        discountSelected: e.currentTarget.dataset.index,
-        selectedNumb: this.data.selectedNumb+(this.data.discountSelected==null?1:0)
-      })
+  selectByStar: function (e) {
+    this.setData({
+      selected: e.currentTarget.dataset.index,
+      pageNo: 1
+    });
+    this.getShopList();
+  },
+  jump: function(e){
+    console.info(e)
+    if(app.globalData.userInfo){
+      wx.navigateTo({
+        url: '/pages/menu/menu?shopId='+e.currentTarget.dataset.id,
+      });
     }else{
-      this.setData({
-        discountSelected: null,
-        selectedNumb: this.data.selectedNumb - 1
-      })
+      wx.showModal({
+        title: '提示',
+        content: '请先登录',
+        showCancel: true,
+        cancelText: '取消',
+        cancelColor: '#000000',
+        confirmText: '确定',
+        confirmColor: '#3CC51F',
+        success: (result) => {
+          if(result.confirm){
+            wx.switchTab({
+              url: '/pages/my/my',
+            });
+          }
+        },
+      });
     }
-  },
-  onTapTag: function (e) {
-    console.info(e);
-    this.setData({
-      selected: e.currentTarget.dataset.index
-    });
+    
   },
   /**
    * 生命周期函数--监听页面加载
@@ -151,14 +127,27 @@ Page({
       complete: ()=>{}
     });
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+  getShopList: function(){
+    var that = this;
+    util.requestUrl({
+      url: '/sale/shop/getShopList'+that.data.selected,
+      params: {
+        pageNo: that.data.pageNo,
+        pageSize: that.data.pageSize,
+        longitude: that.data.longitude,
+        latitude: that.data.latitude
+      },
+      method: "POST"
+    })
+    .then(res => {
+      var data = res.data;
+      if(data){
+        that.setData({
+          shopList: data.records
+        })
+      }
+    })
   },
-
   /**
    * 生命周期函数--监听页面显示
    */
@@ -175,31 +164,53 @@ Page({
           longitude: lo,
           latitude: la
         });
-        util.requestUrl({
-          url: '/sale/shop/getShopList'+that.data.selected,
-          params: {
-            pageNo: that.data.pageNo,
-            pageSize: that.data.pageSize,
-            longitude: that.data.longitude,
-            latitude: that.data.latitude
-          },
-          method: "POST"
-        })
-        .then(res => {
-          var data = res.data;
-          if(data){
-            that.setData({
-              shopList: data.records
-            })
-          }
-        })
+        that.getShopList();
       }
     })
     
   },
   lower: function (e){
-    console.info(e)
+    var that = this;
+    if(that.data.more){
+      that.setData({
+        pageNo: that.data.pageNo+1
+      })
+      util.requestUrl({
+        url: '/sale/shop/getShopList'+that.data.selected,
+        params: {
+          pageNo: that.data.pageNo,
+          pageSize: that.data.pageSize,
+          longitude: that.data.longitude,
+          latitude: that.data.latitude
+        },
+        method: "POST"
+      })
+      .then(res => {
+        var data = res.data;
+        if(data.records.length > 0){
+          data.records.forEach(item => {
+            that.data.shopList.push(item)
+          });
+          that.setData({
+            shopList: that.data.shopList
+          })
+        }else{
+          that.setData({
+            pageNo: that.data.pageNo-1,
+            more: 0
+          })
+        }
+      })
+    }
+    
   },
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+  
+  },
+
   /**
    * 生命周期函数--监听页面隐藏
    */

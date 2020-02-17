@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/order/order",
     "pages/my/my",
     "pages/businessRegister/register",
     "pages/shop/shop",
@@ -11,7 +12,9 @@
     "pages/map/map",
     "pages/menu/menu",
     "pages/location/location",
-    "pages/order/order"
+    "pages/pay/pay",
+    "pages/orderDetail/orderDetail",
+    "pages/shopOrder/shopOrder"
   ],
   "window": {
     "navigationBarTitleText": "在线点餐",

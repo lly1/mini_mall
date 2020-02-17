@@ -39,8 +39,11 @@ function wxLogin(that) {
 	            success: function (res) {
                 app.globalData.userInfo = res.data.data;
                 that.setData({
-                  userInfo: res.data.data
+                  userInfo: res.data.data,
+                  newOrder: res.data.data.newOrder
                 });
+                wx.hideLoading();
+                console.log('微信登录成功');
 	            },
 	            fail: function (error) {
 	              console.log(error);

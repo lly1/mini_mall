@@ -28,52 +28,42 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    util.requestUrl({
-      url: '/api/shop/getShopCategory',
-      params: {
-        shopId: app.globalData.shopId,
-      },
-      method: "POST"
+    that.setData({
+      categoryList: app.globalData.userInfo.shop.tShopCategory,
     })
-    .then(res => {
-      var data = res.data;
-      that.setData({
-        categoryList: data
+    //编辑进来的    
+    if(options.id){
+      util.requestUrl({
+        url: '/api/shop/getShopProduct',
+        params: {
+          productId: options.id,
+        },
+        method: "POST"
       })
-      //编辑进来的    
-      if(options.id){
-        util.requestUrl({
-          url: '/api/shop/getShopProduct',
-          params: {
-            productId: options.id,
-          },
-          method: "POST"
-        })
-        .then(res => {
-          var data = res.data;
-          var categoryInd = -1;
-          for (var i = 0; i < that.data.categoryList.length; i++) {
-            if (that.data.categoryList[i].id === data.categoryId) {
-              categoryInd = i
-              break;
-            } else {
-              categoryInd = 0;
-            }
+      .then(res => {
+        var data = res.data;
+        var categoryInd = -1;
+        for (var i = 0; i < that.data.categoryList.length; i++) {
+          if (that.data.categoryList[i].id === data.categoryId) {
+            categoryInd = i
+            break;
+          } else {
+            categoryInd = 0;
           }
-          that.setData({
-            id: data.id,
-            name: data.productName,
-            price: data.productPrice,
-            info: data.productInfo,
-            stock: data.productStock,
-            iconShow: app.basePath + data.productIcon,
-            icon: data.productIcon,
-            statusIndex: data.productStatus,
-            categoryIndex: categoryInd
-          })
+        }
+        that.setData({
+          id: data.id,
+          name: data.productName,
+          price: data.productPrice,
+          info: data.productInfo,
+          stock: data.productStock,
+          iconShow: app.basePath + data.productIcon,
+          icon: data.productIcon,
+          statusIndex: data.productStatus,
+          categoryIndex: categoryInd
         })
-      }
-    });
+      })
+    }
   },
   category: function (e){
     this.setData({
@@ -97,7 +87,7 @@ Page({
       url: app.basePath + '/api/shop/saveShopProduct',
       method: 'post',
       data: {
-        shopId: app.globalData.shopId,
+        shopId: app.globalData.userInfo.shop.id,
         id: that.data.id,
         categoryId : that.data.categoryList[that.data.categoryIndex].id,
         productName : fdata.name,

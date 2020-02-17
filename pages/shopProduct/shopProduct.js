@@ -30,7 +30,7 @@ Page({
       url: '/api/shop/delShopProduct',
       params: {
         id: e.currentTarget.dataset.id,
-        shopId: app.globalData.shopId
+        shopId: app.globalData.userInfo.shop.id
       },
       method: "POST"
     })
@@ -113,7 +113,8 @@ Page({
     util.requestUrl({
       url: '/api/shop/getShopCategory',
       params: {
-        shopId: app.globalData.shopId,
+        shopId: app.globalData.userInfo.shop.id,
+        isSale: '0'
       },
       method: "POST"
     })

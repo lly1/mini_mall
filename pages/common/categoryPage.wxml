@@ -1,0 +1,97 @@
+<template name="categoryPage">
+    <scroll-view class="orderPage-sideBar" 
+    bindscrolltolower="lower" 
+    scroll-y="true">
+      <block wx:for="{{categoryList}}" wx:key="">
+        <view class="menuList">
+          <view class="menu {{index==selected?'selected':''}} {{item.categoryName.length > 5?'two':''}}" 
+            data-index="{{index}}" catchtap="turnCategory">
+            {{item.categoryName}}
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+    <scroll-view class="foodList" scroll-y="true">
+      <view class="title">{{categoryList[selected].categoryName}}</view>
+      <block wx:for="{{categoryList[selected].shopProducts}}" wx:key="">
+        <view class="food">
+          <image class="img" src="{{basePath+item.productIcon}}"></image>
+          <view class="food-info">
+            <view class="name">
+              {{item.productName}}
+            </view>
+            <view class="sales">
+              月售 {{item.saleTotal}} 赞 {{item.starTotal}}
+            </view>
+            <view class="price">
+              ￥  {{item.productPrice}}
+            </view>
+          </view>
+          <view class="food-numb">
+            <view class="remove" bindtap="removeFromCart" hidden="{{!item.cart}}" data-cartid="{{item.cart.id}}" data-index="{{index}}">
+                -
+            </view>
+            <text class="text" wx:if="{{item.cart.buyNum>0}}">
+              {{item.cart.buyNum}}
+            </text>
+            <text class="text" wx:else>
+              0
+            </text>
+            <view class="add" bindtap="addToCart" data-productid="{{item.id}}" data-index="{{index}}">
+                +
+            </view>
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+    <!-- 购物车 -->
+  <view class='shopping-cart-bg'>
+    <view class='shopping-cart'>
+      <view class='left-box' bindtap="changeCartStatus">
+        <view class='icon-wrap' >
+          <image src='/images/cart.png' class='icon-card'></image>
+          <view class='icon-num' wx:if="{{cartList}}">{{cartList.length}}</view>
+        </view>
+        <view class='price' wx:if="{{cost> 0}}">￥{{cost}}</view>
+      </view>
+      <view class='right-box'>
+        <view bindtap='goSureOrder'>提交订单</view>
+      </view>
+    </view>
+  </view>
+  <!-- 购物车详情 -->
+  <view class='cart-details' wx:if="{{cartStatus}}">
+    <view class='mask' bindtap="changeCartStatus"></view>
+    <view class='content'>
+      <view class='title'>
+        <view class='left-box'>已选择商品</view>
+        <view class='right-box' bindtap="clearCart">
+          <text>全部清空</text>
+          <image src='/images/del.png'></image>
+        </view>
+      </view>
+      <view class='item-wrap'>
+        <view class='item' wx:for="{{cartList}}" wx:key="">
+          <view class='goods-name'>{{item.product.productName}}</view>
+          <view class='goods-price'>￥{{item.product.productPrice*item.buyNum}}</view>
+          <view class='num-wrap'>
+            <view class="food-numb">
+              <view class="remove" bindtap="removeFromCart" hidden="{{!item}}" data-cartid="{{item.id}}" data-index="{{index}}">
+                  -
+              </view>
+              <text class="text" wx:if="{{item.buyNum>0}}">
+                {{item.buyNum}}
+              </text>
+              <text class="text" wx:else>
+                0
+              </text>
+              <view class="add" bindtap="addToCart" data-productid="{{item.product.id}}" data-index="{{index}}">
+                  +
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

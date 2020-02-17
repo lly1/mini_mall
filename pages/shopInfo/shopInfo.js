@@ -10,7 +10,8 @@ Page({
     openTime:'',
     shopInfo:'',
     longitude:'',
-    latitude:''
+    latitude:'',
+    location:''
   },
   onLoad: function (options) {
     var that = this;
@@ -62,7 +63,8 @@ Page({
         openTime : fdata.openTime,
         shopInfo : fdata.shopInfo,
         longitude : that.data.longitude,
-        latitude : that.data.latitude
+        latitude : that.data.latitude,
+        address : that.data.location
       },
       header: {
         'cookie': 'JSESSIONID='+ app.globalData.token
@@ -70,7 +72,7 @@ Page({
       success: function (res) {
         wx.hideLoading();
         console.info(res)
-        app.globalData.shopId = res.data.data.id;
+        app.globalData.userInfo.shop = res.data.data;
         wx.showToast({
           title: res.data.message,
           duration: 1000

@@ -46,6 +46,7 @@ Page({
       that.setData({
         categoryList: res.data
       })
+      app.globalData.userInfo.shop.tShopCategory = res.data
     })
 },
   cancel() {
@@ -59,7 +60,7 @@ Page({
       url: '/api/shop/saveShopCategory',
       params: {
         id: that.data.categoryId,
-        shopId: app.globalData.shopId,
+        shopId: app.globalData.userInfo.shop.id,
         categoryName: that.data.categoryName
       },
       method: "POST"
@@ -73,6 +74,7 @@ Page({
         hide: true,
         categoryList: res.data
       })
+      app.globalData.userInfo.shop.tShopCategory = res.data
     })
   },
   inputName: function(e){
@@ -82,19 +84,8 @@ Page({
     })
   },
   onLoad: function() {
-    var that = this;
-    util.requestUrl({
-      url: '/api/shop/getShopCategory',
-      params: {
-        shopId: app.globalData.shopId,
-      },
-      method: "POST"
-    })
-    .then(res => {
-      console.info(res)
-      that.setData({
-        categoryList: res.data
-      })
+    this.setData({
+      categoryList: app.globalData.userInfo.shop.tShopCategory
     })
   },
   touchstart: function(e) {

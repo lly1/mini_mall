@@ -53,7 +53,7 @@ Page({
               longitude: lo,
               currentRegion: res.address_component,
               keyword: that.data.defaultKeyword,
-              address: that.data.address
+              address: res.address
             });
             //调用接口
             that.nearby_search();

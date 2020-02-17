@@ -9,7 +9,8 @@ Page({
   data: {
     mesheight: {},
     meswidth: {},
-    userInfo: null
+    userInfo: null,
+    newOrder: 0,
   },
 
   /**
@@ -39,16 +40,18 @@ Page({
     });
     wx.login({
       success: function (res) {
-        console.log('微信登录成功');
         wx.setStorageSync("js_code", res.code)
       }
-    });		
+    });
+    
   },
   userInfoHandle: function (options) {
     var that = this;
     console.log('用户数据');
     console.log(options);
-    
+    wx.showLoading({
+      title: '登录中'
+    });
 		util.wxLogin(that);
   },
   /**

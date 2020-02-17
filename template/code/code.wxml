@@ -1,0 +1,15 @@
+<template name="code">
+  <view class="category" hidden="{{hide}}">
+    <view class="s-b">
+      <view class="s-l-b">
+        <text>取货号</text>
+      </view>
+      <view class="s-l-b">
+        <view name="categoryName">
+           {{rtnCode}}
+        </view>
+      </view>
+      <button class="c" bindtap="cancel" type="default">关闭</button>
+    </view>
+  </view>
+</template>wsa
