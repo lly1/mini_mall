@@ -5,57 +5,33 @@ Page({
    * 页面的初始数据
    */
   data: {
-    locationList:[],
-    hidden: true
+    is_shoucang:0,
+    goods_info: { goods_id: 1, goods_title: "商品标题1", goods_price: '100', goods_yunfei: 0, goods_kucun: 100, goods_xiaoliang: 1, content:'商品介绍详情商品介绍详情商品介绍详情商品介绍详情商品介绍详情商品介绍详情商品介绍详情'},
+    goods_img: [
+      {'img': 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'},
+      {'img': 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg' },
+      {'img': 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg' },
+      {'img': 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg' },
+      ],
+    indicatorDots: true,
+    autoplay: true,
+    interval: 5000,
+    duration: 1000,
+    pjDataList: [{ headpic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', author: '张三', add_time: '2018-06-01', content:'好评好评，真实太好了!'},
+      { headpic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', author: '张三', add_time: '2018-06-01', content: '好评好评，真实太好了!' }
+    ],//评价数据
   },
-  onTap: function (e) {
-    wx.setStorageSync('location',e.currentTarget.dataset.key)
-    wx.switchTab({
-      url: '/pages/home/home'
-    })
-  },
-  getLocation: function () {
-    wx.getLocation({
-      type: 'gcj02',
-      success: function (res) {
-        var latitude = res.latitude
-        var longitude = res.longitude
-        wx.request({
-          url: 'http://api.map.baidu.com/geocoder/v2/?ak=btsVVWf0TM1zUBEbzFz6QqWF&coordtype=gcj02ll&location=' + latitude + ',' + longitude + '&output=json&pois=0',
-          method: "get",
-          success: function (res) {
-            console.log(res.data.result.formatted_address)
-            wx.setStorageSync('location', res.data.result.formatted_address.substr(res.data.result.formatted_address.indexOf('市') + 1, 10))
-          }
-        })
-      }
-    })
-    wx.switchTab({
-      url: '/pages/home/home'
-    })
-  },
-  input: function (e){
-    if(e.detail.value){
-      this.setData({
-        hidden: false
-      })
-      this.search(e.detail.value);
-    }else{
-      this.setData({
-        hidden: true
-      })
+  previewImage: function (e) {
+    var current = e.target.dataset.src;
+    var href = this.data.imghref;
+    var goodsimg = this.data.goods_img;
+    var imglist = [];
+    for (var i = 0; i < goodsimg.length; i++) {
+      imglist[i] = href + goodsimg[i].img
     }
-  },
-  search: function (text){
-    var that = this;
-    wx.request({
-      url: 'http://api.map.baidu.com/place/v2/search?query=' + text +'&page_size=20&page_num=0&scope=2&region=南昌&output=json&ak=btsVVWf0TM1zUBEbzFz6QqWF',
-      success: function(res){
-        console.log(res);
-        that.setData({
-          locationList:res.data.results
-        })
-      }
+    wx.previewImage({
+      current: current, // 当前显示图片的http链接  
+      urls: imglist// 需要预览的图片http链接列表  
     })
   },
 

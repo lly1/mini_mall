@@ -38,10 +38,16 @@ function wxLogin(that) {
 	            },
 	            success: function (res) {
                 app.globalData.userInfo = res.data.data;
-                that.setData({
-                  userInfo: res.data.data,
-                  newOrder: res.data.data.newOrder
-                });
+                if(res.data.data.newOrder){
+                  that.setData({
+                    userInfo: res.data.data,
+                    newOrder: res.data.data.newOrder
+                  });
+                }else{
+                  that.setData({
+                    userInfo: res.data.data,
+                  });
+                }
                 wx.hideLoading();
                 console.log('微信登录成功');
 	            },
