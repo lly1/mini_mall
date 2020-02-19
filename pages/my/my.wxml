@@ -13,7 +13,7 @@
   </view>
   <view class="content">
     <block wx:if="{{userInfo}}">
-      <navigator wx:if="{{userInfo.roleId != 1}}" url="/pages/shopOrder/shopOrder">
+      <navigator wx:if="{{userInfo.roleId == 1}}" url="/pages/shopOrder/shopOrder">
         <view class="menu-item">
           <view class="l">店铺订单</view>
           <view class='icon-num'>{{newOrder}}</view>

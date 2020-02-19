@@ -45,11 +45,12 @@
            style="font-size:30rpx" maxlength='150' placeholder="特殊需求请备注" bindinput="remarks"/>
       </view>
     </view>
-</scroll-view>
-<view class="footer">
+    <view class="footer">
       <view class="howMuch">
         <view class="total">合计</view>
         <view class="cost">￥{{order.payTotal}}</view>
       </view>
       <view class="pay" bindtap="pay">支付</view>      
-</view>
+    </view>
+</scroll-view>
+
