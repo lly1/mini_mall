@@ -1,89 +1,67 @@
-<!--商品幻灯片-->
-<swiper  interval="{{interval}}" class="banner" duration="{{duration}}" circular="{{duration}}">
-  <block wx:for="{{goods_img}}" wx:key="goods_info">
-    <swiper-item>
-      <image src="{{imghref}}{{item.img}}" class="slide-image" mode="aspectFill" data-src='{{imghref}}{{item.img}}' bindtap="previewImage"/>
-    </swiper-item>
-  </block>
-</swiper>
-<!--商品幻灯片 end-->
-<view class="info-price clear">
-  <view class='price'>￥{{goods_info.goods_price}} </view>
-  <view class='fenxiang'>
-      <button class='fxbtn' open-type="share">
-        <view style='height:20px;margin-top:8px;'><image src='/img/fenxiang.png' mode="aspectFill" ></image></view>
-        <view>分享</view>
-      </button>
-  </view>
-</view>
-<view class="info-title">
-    <text>{{goods_info.goods_title}}</text>
-</view>
- 
-<view style="border-top:1px solid #F6F6F6;background: #fff; padding:5px 15px;">
-    <view class="clearfix flex grey gridXt">
-      <text class="sub"><block wx:if='{{goods_info.goods_yunfei==0.00}}'>运费：包邮</block><block wx:else>运费：{{goods_info.goods_yunfei}}</block></text>
-      <text class="sub">库存：{{goods_info.goods_kucun}}</text>
-      <text class="sub">销量：{{goods_info.goods_xiaoliang}}</text>
-    </view>
-</view>
-<block wx:if="{{pjDataList!=''}}">
-  <!--评价-->
-  <view class='pj_box'>
-    <view style="height:40px;line-height: 40px;border-bottom:1px solid #f5f5f5;">
-     <view style='float:left;'>商品评价</view>
-     <view style='float:right;margin-left:2px;margin-top:-1px;'>
-        <image src="/img/ico_jt.png" class="ico_img_jt"></image>
-     </view>
-     <view style='float:right;font-size:12px;color:#A2A2A2;'>
-        <navigator url="pjList?id={{goods_id}}">查看全部</navigator>
-     </view>
-     <view class='clear'></view>
-    </view>
-    <block wx:for="{{pjDataList}}" wx:for-item="item" wx:key="pj">
-      <view class="list_item">
-        <view class='pj_u_info clear'>
-          <view class='header_img'><image src="{{item.headpic}}" mode="aspectFit"></image></view>
-          <view class='name'>{{item.author}}</view>
-          <view class='time'>{{item.add_time}}</view>
-        </view>
-        <view class='pj_cont'>
-          {{item.content}}
-        </view>
-      </view>
+<swiper
+        indicator-dots="true"
+        autoplay="true"
+        interval="2000"
+        duration="500"
+        indicator-color="rgba(0,0,0,0.5)"
+        indicator-active-color="red"
+        circular="true"
+>
+    <block wx:for="{{imgUrls}}">
+        <swiper-item>
+            <image src="{{item}}" class="slide-image" style="width: 100%;height: 562rpx"/>
+        </swiper-item>
     </block>
-</view>
-</block>
+</swiper>
 <!--商品详情-->
-<view class='details_box'>
-  <view style="height:40px;line-height: 40px;border-bottom:1px solid #f5f5f5;">
-     <view>商品详情</view>
-  </view>
-  <view style='padding:10px 0px;'>
-      <view class="wxParse">
-         {{goods_info.content}}
-      </view>
+<view class="goods_content">
+    <view class="content">
+        <view class="goods_title">日系风格黄麻底拖鞋</view>
+        <view class="goods_brief">天然黄麻做中底，吸湿透气好，清爽、不干燥，耐磨耐穿、男女同款</view>
+        <view class="goods_price">￥49</view>
+    </view>
+    <view class="share">
+        <text class="iconfont icon-fenxiang"></text>
+        <view class="fenxiang">分享</view>
+    </view>
+</view>
+<view class="message">
+    <view class="goods_message">
+        <view>商品评价</view>
+        <view><text class="iconfont icon-arrowright"></text></view>
+    </view>
+    <view class="goods_message">
+        <view>购买须知</view>
+        <view><text class="iconfont icon-arrowright"></text></view>
+    </view>
+    <view class="goods_message">
+        <view>商品规格</view>
+        <view><text class="iconfont icon-arrowright"></text></view>
     </view>
 </view>
  
-<!--底部浮动 start-->
-<view class="foot-nav mt15">
-  <view class="flex con gridXt tc">
-    <view class="fast-links mr15 flex f12">
-      <view class="sub gridYr" bindtap='shoucang'>
-        <text class="iconfont {{is_shoucang==0?'icon-shoucang1':'icon-shoucang2'}}">收藏</text>
-      </view>
-      <view class="sub kefu">
-       <button open-type="contact">
-        <text class="iconfont icon-lianxikefu">客服</text>
-       </button>
-      </view>
-      <view class="sub gridYr">
-        <text class="iconfont icon-gouwuche">购物车</text>
-      </view>
+<!--图文详情-->
+<view class="image_text">
+    <view class="image_text_title">图文详情</view>
+    <view>
+        lalalallal
     </view>
-    <view class="add-cart sub f16">
-      <button class="add-cart-btn" bindtap='buy'>立即购买</button>
+</view>
+ 
+<!--底部导航-->
+<view class="footer_nav">
+    <view class="nav_list">
+        <text class="iconfont icon-store_refund"></text>
+        <view class="nav_name">首页</view>
     </view>
-  </view>
+    <view class="nav_list">
+        <text class="iconfont icon-star"></text>
+        <view class="nav_name">收藏</view>
+    </view>
+    <view class="nav_list">
+        <text class="iconfont icon-toolbar_cart_normal"></text>
+        <view class="nav_name">购物车</view>
+    </view>
+    <view class="add_cart goods_buy">加入购物车</view>
+    <view class="now_buy goods_buy" bindtap="bindnowbuy">立即购买</view>
 </view>
