@@ -47,7 +47,7 @@
           </view>
           <view 
           class="shop-distribution-time">
-            约{{filters.toFix2(item.distance*11)}}分钟
+            每单约{{item.sellTime}}分钟
           </view>
         </view>
        </view>

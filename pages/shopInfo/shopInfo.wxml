@@ -36,6 +36,13 @@
   </view>
   <view class="shopstore">
       <view class="shopstore_log">
+        <text class="textinput">平均出单时间(分钟):</text>
+        <input placeholder-class='placeholder' placeholder-style='font-size:26rpx;' class="in" name="sellTime" value="{{sellTime}}"/>
+      </view>
+      <view  class="xian"></view>
+  </view>
+  <view class="shopstore">
+      <view class="shopstore_log">
       <input type="hidden" name="longitude" value="{{longitude}}" style="display:none"/>
       <input type="hidden" name="latitude" value="{{latitude}}" style="display:none"/>
         <button class="location" hover-class='button-hover' bindtap="selectLocation">选择门店地址</button>

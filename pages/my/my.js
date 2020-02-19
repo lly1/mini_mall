@@ -65,11 +65,31 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if(app.globalData.userInfo){
-      this.setData({
-        userInfo: app.globalData.userInfo
+    var that = this;
+    var info = app.globalData.userInfo;
+    if(info){
+      that.setData({
+        userInfo: info
       });
       console.info("更新用户信息")
+      //商家查询一下订单
+      if(info.shop){
+        util.requestUrl({
+          url: '/api/order/getShopPayOrder',
+          params: {
+            shopId : info.shop.id
+          },
+          method: "POST"
+        })
+        .then(res => {
+          console.info(res)
+          info.shop.newOrder = res.data.newOrder
+          that.setData({
+            newOrder: res.data.newOrder
+          });
+          console.info("更新订单信息")
+        })
+      }
     }  
   },
 

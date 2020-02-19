@@ -8,10 +8,11 @@ Page({
     shopLogo:'',
     shopName:'',
     openTime:'',
+    sellTime:'',
     shopInfo:'',
     longitude:'',
     latitude:'',
-    location:''
+    location:'',
   },
   onLoad: function (options) {
     var that = this;
@@ -31,6 +32,7 @@ Page({
           shopLogo: data.shopLogo,//存储数据用
           shopName: data.shopName,
           openTime: data.openTime,
+          sellTime: data.sellTime,
           shopInfo: data.shopInfo,
           longitude: data.longitude,
           latitude: data.latitude
@@ -61,6 +63,7 @@ Page({
         shopLogo : that.data.shopLogo,
         shopName : fdata.shopName,
         openTime : fdata.openTime,
+        sellTime : fdata.sellTime,
         shopInfo : fdata.shopInfo,
         longitude : that.data.longitude,
         latitude : that.data.latitude,

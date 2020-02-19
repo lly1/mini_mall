@@ -1,26 +1,124 @@
 <scroll-view class="container" scroll-y="true">
-  <block wx:for="{{orderList}}" wx:key="">
     <view class="orderList">
-      <view class="order-title">
-        <view class="order-title-restaurantName">
-          {{item.restaurantName}}</view>
-        <view class="order-title-state">{{item.state}}</view>
-      </view>
-      <view class="order-content">
-        <image class="order-content-restaurantImg"
-         src="http://i4.piimg.com/601998/9ce47f2f19d7717d.jpg"></image>
-        <view class="order-content-info">
-          <view class="order-content-info-price">￥ {{item.price}}</view>
-          <view class="order-content-info-date">
-          {{item.date}} {{item.time}}</view>
-          <view class="order-content-info-howToDistribute">
-          由 {{item.howToDistribute}} 提供服务</view>
+      <view class="order-head" wx:if="{{order.orderStatus == 0}}">
+        <view class="orderTitleName">
+          订单已提交
+        </view>
+        <view class="orderTitle">
+          请尽快支付您的订单。
         </view>
       </view>
-      <view class="order-footer">
-        <view class="order-footer-orderAgain">再来一单</view>
-        <view class="order-footer-goToComment">去评论</view>
+      <view class="order-head" wx:if="{{order.orderStatus == 1}}">
+        <view class="orderTitleName">
+          订单已支付
+        </view>
+        <view class="orderTitle">
+          等待商家接单中，请耐心等待。
+        </view>
+      </view>
+       <view class="order-head" wx:if="{{order.orderStatus == 2}}">
+        <view class="orderTitleName">
+          商家已接单
+        </view>
+        <view class="orderTitle">
+          等待商家出货，预计{{order.shop.sellTime}}分钟。
+        </view>
+        <view class="button" style="font-size: 37rpx;font-weight: 800;">
+            取货号：{{order.rtnCode}}
+        </view>
+      </view>
+       <view class="order-head" wx:if="{{order.orderStatus == 3}}">
+        <view class="orderTitleName">
+          订单已完成
+        </view>
+        <view class="orderTitle">
+          感谢你对在线点餐的信任，期待再次光临。
+        </view>
+        <view class="button">
+            <view class="orderAgain" bindtap="buyAgain" data-detail="{{order.detailList}}" data-shopid="{{order.shop.id}}">再来一单</view>
+        </view>
       </view>
     </view>
-  </block> 
+    <view class="orderList">
+      <view class="order-title">
+        <image class="order-restaurantImg"src="{{basePath+order.shop.shopLogo}}"></image>
+        <navigator url="/pages/menu/menu?shopId=" class="content">
+          <view class="order-title-restaurantName">
+            {{order.shop.shopName}}
+          </view>
+          <image class="next" src="/images/system/next.png"></image>
+        </navigator>
+      </view>
+      <block wx:for="{{order.detailList}}" wx:key="">
+        <view class="order-content">
+            <image class="order-content-restaurantImg" src="{{basePath+item.product.productIcon}}"></image>
+              <view class="order-content-info">
+                <view class="order-content-info-name">
+                  {{item.product.productName}}
+                </view>
+                <view class="order-content-info-price">
+                  ￥{{item.product.productPrice}}
+                </view>
+                <view class="order-content-info-date">
+                  ×{{item.buyNum}}
+                </view>
+              </view>
+        </view>
+      </block> 
+      <view class="order-footer">
+        <view class="order-footer-totalPrice">小计￥</view>
+        <view class="price">{{order.payTotal}}</view>
+      </view>
+      <view class="button" bindtap="phoneShop" data-phone="{{order.shop.phone}}">
+            <image class="phoneImg" src="/images/system/phone.png"></image>
+            <view class="phone">联系商家</view>
+      </view>
+    </view>
+    <view class="orderList">
+      <view class="order-title">
+        <view class="order-title-name">
+          支付方式
+        </view>
+        <view class="order-title-payway">
+          在线支付
+        </view>
+      </view>
+      <view class="order-title" style="border-bottom: none;">
+        <view class="order-title-name">
+          配送服务
+        </view>
+        <view class="order-title-state">
+          自提
+        </view>
+      </view>
+      <view class="section">
+        <view class="jieshang">备注</view>
+          <view  class="xian"></view>
+          <textarea  maxlength='150' value="{{order.remarks}}" readonly="true"/>
+      </view>
+    </view>
+    <view class="orderList">
+      <view class="order-title">
+        <view class="order-title-name">
+          订单号码
+        </view>
+        <view class="order-title-payway">
+          {{order.id}}
+        </view>
+      </view>
+      <view class="order-title" style="border-bottom: none;">
+        <view class="order-title-name">
+          订单时间
+        </view>
+        <view class="order-title-payway">
+          {{order.createTime}}
+        </view>
+      </view>
+    </view>
+    <view class="orderList">
+      <view class="button" bindtap="phoneHelp">
+          <image class="phoneImg" src="/images/system/help.png"></image>
+          <view class="help">在线点餐客服</view>
+      </view>
+    </view>
 </scroll-view>

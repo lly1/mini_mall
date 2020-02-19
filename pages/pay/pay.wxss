@@ -37,7 +37,6 @@
   height: 35rpx;
   line-height: 35rpx;
   border-radius: 20rpx 5rpx;
-
 }
 .order-content{
   padding: 20rpx;

@@ -35,7 +35,7 @@
       </navigator>
     </block>
     <view class="space"></view>
-    <navigator url="/pages/pay/pay">
+    <navigator url="/pages/orderDetail/orderDetail">
         <view class="menu-item">
           <view class="l">帮助和反馈</view>
           <image class="next" src="/images/system/next.png"></image>

@@ -7,13 +7,13 @@
 </view>
 <swiper class="swiper" current="{{currentPage}}"
   bindchange="turnTitle">
-  <swiper-item  item-id="">
+  <swiper-item  item-id="" catchtouchmove="catchTouchMove">
     <template is="orderPage" data="{{orderList,basePath,currentPage,hide,rtnCode}}"/>
   </swiper-item>
-  <swiper-item  item-id="">
-    <template is="orderPage" data="{{orderList,basePath,currentPage}}"/>
+  <swiper-item  item-id="" catchtouchmove="catchTouchMove">
+    <template is="orderPage" data="{{orderList,basePath,currentPage,hide,rtnCode}}"/>
   </swiper-item>
-  <swiper-item  item-id="">
-    <template is="orderPage" data="{{orderList,basePath,currentPage}}"/>
+  <swiper-item  item-id="" catchtouchmove="catchTouchMove">
+    <template is="orderPage" data="{{orderList,basePath,currentPage,hide,rtnCode}}"/>
   </swiper-item>
 </swiper>

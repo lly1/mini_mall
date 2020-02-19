@@ -16,7 +16,7 @@
             <view class="order-title-state" wx:if="{{item.orderStatus==1}}">订单已支付</view>
             <view class="order-title-state" wx:if="{{item.orderStatus==3}}">订单已完成</view>
           </view>
-            <view class="order-content">       
+            <view class="order-content" catchtap="goDetail" data-order="{{item}}">       
               <view class="order-content-info">
                 <view wx:for="{{item.detailList}}" wx:key="" wx:for-item="detail">
                   <view class="order-content-info-content">

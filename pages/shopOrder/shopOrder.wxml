@@ -11,6 +11,6 @@
     <template is="shopOrderPage" data="{{orderList,basePath,currentPage,hide,rtnCode}}"/>
   </swiper-item>
   <swiper-item  item-id="">
-    <template is="shopOrderPage" data="{{orderList,basePath,currentPage}}"/>
+    <template is="shopOrderPage" data="{{orderList,basePath,currentPage,hide,rtnCode}}"/>
   </swiper-item>
 </swiper>

@@ -22,6 +22,11 @@ Page({
     rtnCode: null,
     hide: true
   },
+  goDetail: function (e){
+    wx.navigateTo({
+      url: '/pages/orderDetail/orderDetail?order='+JSON.stringify(e.currentTarget.dataset.order)
+    })
+  },
   showCode: function (e){
     this.setData ({
       hide: false,

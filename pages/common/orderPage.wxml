@@ -24,7 +24,7 @@
             <view class="order-title-state" wx:if="{{item.orderStatus==2}}">商家已接单</view>
             <view class="order-title-state" wx:if="{{item.orderStatus==3}}">订单已完成</view>
           </view>
-            <view class="order-content">       
+            <view class="order-content" catchtap="goDetail" data-order="{{item}}">       
               <view class="order-content-info">
                 <view wx:for="{{item.detailList}}" wx:key="" wx:for-item="detail">
                   <view class="order-content-info-content">
@@ -38,7 +38,7 @@
                 </view>
                 <view class="order-content-info-distribute">
                   <view class="order-content-info-title">
-                    共{{item.detailList.length}}件商品，实付
+                    共{{item.buyTotal}}件商品，实付
                   </view>
                   <view class="order-content-info-price">
                     ￥{{item.payTotal}}
@@ -48,10 +48,10 @@
             </view>
           <view class="order-footer">
             <view class="order-footer-goToComment" wx:if="{{item.orderStatus==3&&item.isRate=='0'}}">去评论</view>
-            <view class="order-footer-orderAgain" wx:if="{{item.orderStatus>0}}" bindtap="buyAgain" data-detail="{{item.detailList}}" data-shopid="{{item.shopId}}">再来一单</view>
+            <view class="order-footer-orderAgain" wx:if="{{item.orderStatus>0}}" bindtap="buyAgain" data-detail="{{item.detailList}}" data-shopid="{{item.shop.id}}">再来一单</view>
             <view class="pay" wx:if="{{item.orderStatus==0}}" bindtap='goToPay' data-orderid="{{item.id}}">去支付</view>
             <view class="order-footer-orderAgain" wx:if="{{item.orderStatus==2}}" bindtap="showCode" data-rtncode="{{item.rtnCode}}">取货号</view>
-            <view class="pay" wx:if="{{item.orderStatus==2}}" bindtap='finish' data-orderid="{{item.id}}">确认收货</view>
+            <view class="pay" wx:if="{{item.orderStatus==2}}" bindtap='confirm' data-orderid="{{item.id}}">确认收货</view>
           </view>
         </view>
         <view class="del" catchtap="del" data-id="{{item.id}}">删除</view>

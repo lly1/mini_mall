@@ -33,13 +33,40 @@ Page({
       rtnCode: e.currentTarget.dataset.rtncode
     })
   },
+  cancel() {
+    this.setData({
+      hide: true
+    })
+  },
+  confirm: function (e){
+    var that = this;
+    util.requestUrl({
+      url: '/api/order/confirm',
+      params: {
+        orderId: e.currentTarget.dataset.orderid,
+      },
+      method: "POST"
+    })
+    .then(res => {
+      var data = res.data;
+      wx.showToast({
+        title: data,
+        duration: 1000
+      })
+      that.getOrder();
+    })
+  },
   goToPay: function (e){
     wx.navigateTo({
       url: '/pages/pay/pay?orderId='+e.currentTarget.dataset.orderid
     })
   },
+  goDetail: function (e){
+    wx.navigateTo({
+      url: '/pages/orderDetail/orderDetail?order='+JSON.stringify(e.currentTarget.dataset.order)
+    })
+  },
   buyAgain: function (e){
-    var that = this;
     wx.request({
       url: app.basePath + "/api/order/buyAgain",
       data: JSON.stringify(e.currentTarget.dataset.detail),
@@ -55,6 +82,10 @@ Page({
         }
       },
     })
+  },
+  // 禁止左右滑动，影响删除
+  catchTouchMove:function(res){
+    return false
   },
   turnPage: function (e) {
     this.setData({
@@ -84,9 +115,22 @@ Page({
     })
     .then(res => {
       console.info(res)
-      wx.showToast({
-        title: res.data,
-      });
+      if(!res.success){
+        wx.showModal({
+          title: '提示',
+          content: res.data,
+          showCancel: true,
+          cancelText: '取消',
+          cancelColor: '#000000',
+          confirmText: '确定',
+          confirmColor: '#3CC51F',
+          success: (result) => {
+            if(result.confirm){
+              
+            }
+          },
+        });
+      }
       that.getOrder();
     })
   },

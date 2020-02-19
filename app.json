@@ -1,14 +1,15 @@
 {
   "pages": [
+    "pages/my/my",
     "pages/home/home",
     "pages/order/order",
-    "pages/my/my",
     "pages/businessRegister/register",
     "pages/shop/shop",
     "pages/shopInfo/shopInfo",
     "pages/shopCategory/shopCategory",
     "pages/shopProduct/shopProduct",
     "pages/addProduct/addProduct",
+    "pages/productDetail/productDetail",
     "pages/map/map",
     "pages/menu/menu",
     "pages/location/location",
