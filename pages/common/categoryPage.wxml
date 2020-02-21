@@ -14,7 +14,7 @@
     <scroll-view class="foodList" scroll-y="true">
       <view class="title">{{categoryList[selected].categoryName}}</view>
       <block wx:for="{{categoryList[selected].shopProducts}}" wx:key="">
-        <view class="food">
+        <view class="food" bindtap="goDetail" data-product="{{item}}">
           <image class="img" src="{{basePath+item.productIcon}}"></image>
           <view class="food-info">
             <view class="name">
@@ -50,7 +50,7 @@
       <view class='left-box' bindtap="changeCartStatus">
         <view class='icon-wrap' >
           <image src='/images/cart.png' class='icon-card'></image>
-          <view class='icon-num' wx:if="{{cartList}}">{{cartList.length}}</view>
+          <view class='icon-num' wx:if="{{cartList}}">{{buyTotal}}</view>
         </view>
         <view class='price' wx:if="{{cost> 0}}">￥{{cost}}</view>
       </view>

@@ -61,6 +61,11 @@ Page({
       url: '/pages/pay/pay?orderId='+e.currentTarget.dataset.orderid
     })
   },
+  goRate: function (e){
+    wx.navigateTo({
+      url: '/pages/comment/comment?order='+JSON.stringify(e.currentTarget.dataset.order)
+    })
+  },
   goDetail: function (e){
     wx.navigateTo({
       url: '/pages/orderDetail/orderDetail?order='+JSON.stringify(e.currentTarget.dataset.order)

@@ -76,18 +76,6 @@
   font-size: 30rpx;
   color: gray;
 }
-.order-title-state{
-  width: 130rpx;
-  color: #fff;
-  margin-right: 20rpx;
-  font-size: 28rpx;
-  text-align: center;
-  background-color: #33cc33;
-  height: 35rpx;
-  line-height: 35rpx;
-  border-radius: 20rpx 5rpx;
-
-}
 .order-content{
   padding: 20rpx;
   display: flex;

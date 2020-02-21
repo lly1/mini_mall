@@ -26,7 +26,7 @@
   <template is="sort_list" data="{{selected}}"/>
     <view class="shopList">
     <block wx:for="{{shopList}}" wx:key="">
-      <view bindtap="jump" data-id="{{item.id}}">
+      <view bindtap="jump" data-shopid="{{item.id}}">
         <view class="shop-list">
           <view class="shop-info-image">
             <image src="{{basePath+item.shopLogo}}" class="shop-image"/>

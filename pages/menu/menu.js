@@ -7,7 +7,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    pageNo:1,
+    pageSize: 10,
+    more:1,
     shopId: '',
+    shop: null,
     basePath: app.basePath,
     cartStatus: false,
     swiperTitle: [{
@@ -17,11 +21,13 @@ Page({
       text: "评价",
       id: 2
     }],
-    categoryList:[],
-    cartList:[],
+    categoryList:[],//菜单
+    cartList:[],//购物车
+    commentList:[],//评价
     currentPage: 0,
     selected: 0,//选择的类目
     cost:0,
+    buyTotal: 0
   },
   addToCart: function (e) {
     var that = this;
@@ -121,13 +127,17 @@ Page({
   },
   turnPage: function (e) {
     this.setData({
-      currentPage: e.currentTarget.dataset.index
+      currentPage: e.currentTarget.dataset.index,
+      pageNo:1,
+      more:1
     })
   },
   turnTitle: function (e) {
     if(e.detail.source=="touch"){
       this.setData({
-        currentPage: e.detail.current
+        currentPage: e.detail.current,
+        pageNo:1,
+        more:1
       })
     }
   },
@@ -150,12 +160,15 @@ Page({
       console.info(res)
       if(res.data){
         var cost = 0;
+        var buyTotal = 0;
         res.data.forEach(function (v, i) {
             cost += v.product.productPrice * v.buyNum
+            buyTotal += v.buyNum
         })
         that.setData({
           cartList: res.data,
-          cost: cost
+          cost: cost,
+          buyTotal: buyTotal
         }) 
       }
     })
@@ -164,6 +177,11 @@ Page({
   changeCartStatus() {
     this.setData({
       cartStatus: !this.data.cartStatus
+    })
+  },
+  goDetail: function (e){
+    wx.navigateTo({
+      url:'/pages/productDetail/productDetail?product='+JSON.stringify(e.currentTarget.dataset.product)
     })
   },
   // 确认订单
@@ -201,12 +219,66 @@ Page({
       }     
     })
   },
+  getComment(){
+    var that = this;
+    util.requestUrl({
+      url: '/api/shop/getShopComment',
+      params: {
+        shopId: that.data.shopId,
+        pageNo: that.data.pageNo,
+        pageSize: that.data.pageSize
+      },
+      method: "POST"
+    })
+    .then(res => {
+      console.info(res)
+      that.setData({
+        commentList: res.data.records
+      })
+    })
+  },
+  lower: function (e){
+    var that = this;
+    if(that.data.more){
+      that.setData({
+        pageNo: that.data.pageNo+1
+      })
+      util.requestUrl({
+        url: '/api/shop/getShopComment',
+        params: {
+          shopId: that.data.shopId,
+          pageNo: that.data.pageNo,
+          pageSize: that.data.pageSize
+        },
+        method: "POST"
+      })
+      .then(res => {
+        var data = res.data;
+        if(data.records.length > 0){
+          data.records.forEach(item => {
+            that.data.commentList.push(item)
+          });
+          that.setData({
+            commentList: that.data.commentList
+          })
+        }else{
+          that.setData({
+            pageNo: that.data.pageNo-1,
+            more: 0
+          })
+        }
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.info(options)
     var that = this;
+    console.info(options)
+    that.setData({
+      shopId: options.shopId
+    })
     util.requestUrl({
       url: '/api/shop/getShopInfoById',
       params: {
@@ -217,25 +289,9 @@ Page({
     .then(res => {
       console.info(res)
       that.setData({
-        shop: res.data
+        shop: res.data,
       })
-    })
-    util.requestUrl({
-      url: '/api/shop/getShopCategory',
-      params: {
-        shopId: options.shopId,
-        isSale: '1',
-        userId: app.globalData.userInfo.id
-      },
-      method: "POST"
-    })
-    .then(res => {
-      console.info(res)
-      that.setData({
-        categoryList: res.data,
-        shopId: options.shopId
-      })
-      that.getCart();
+      that.getComment();
     })
   },
 
@@ -250,7 +306,24 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    var that = this;
+    util.requestUrl({
+      url: '/api/shop/getShopCategory',
+      params: {
+        shopId: that.data.shopId,
+        isSale: '1',
+        userId: app.globalData.userInfo.id
+      },
+      method: "POST"
+    })
+    .then(res => {
+      console.info(res)
+      that.setData({
+        categoryList: res.data,
+        
+      })
+      that.getCart();
+    })
   },
 
   /**

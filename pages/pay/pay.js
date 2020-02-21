@@ -45,8 +45,8 @@ Page({
                 duration: 1000
               })
               setTimeout(()=>{
-                wx.navigateTo({
-                  url: '/pages/oderDetail/oderDetail?orderId='+res.data.id
+                wx.redirectTo({
+                  url: '/pages/orderDetail/orderDetail?order='+JSON.stringify(res.data)
                 })
               },1000);
             }else{

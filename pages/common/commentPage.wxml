@@ -1,22 +1,28 @@
 <template name="commentPage">
+<scroll-view bindscrolltolower="lower" class="scroll-shop-list" scroll-y="true" style="height:100%;overflow-x:hidden">
+
 <view class="commentPage-header">
   <view class="commentPage-score">
     <view class="overall">综合评分</view>
-    4.3
-    <view class="rate">商家综合好评率为76%</view>
+    {{shop.shopStar}}
   </view>
-  <view class="commentPage-rating">
-    <view class="restaurant">商家评分
-      <view class="stars">★★★★★ 4</view>
-    </view>
-    <view class="distribute">配送评分
-      <view class="stars">★★★★★ 4.6</view>
-    </view>
-    </view>
 </view>
-<view class="commentPage-category">
-  <block wx:for="{{categoryList}}" wx:key="">
-    <view class="category-item">{{item.text}}({{item.numb}})</view>
-  </block>
-</view>
+<block wx:for="{{commentList}}" wx:key="">
+  <view class='qiu' bindtouchstart="touchstar">
+    <view class='qiu_titleAndUser'>
+      <view class='user'>
+        <image class='userImg' src='{{item.user.avatarUrl}}'></image>
+        <text class='userName' style='margin-left:20rpx;'>{{item.user.nickName}}</text>
+      </view>
+      <view class='text_detail'>{{item.content}}</view>
+      <image wx:if="{{imgUrl !==''}}" class='img' src='{{basePath+item.imgUrl}}'></image>
+      <view class='three_but'>
+        <view class='three_view'>
+          <text class='time'>{{item.createTime}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</block>
+</scroll-view>
 </template>

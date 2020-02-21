@@ -1,11 +1,16 @@
-
 page {
   background-color: #f3f3f3;
+}
+.container{
+  height: 100%;
+}
+.head{
+  height: 87%;
+  overflow: auto;
 }
 swiper {
   display:block;
   height:562rpx;
-  margin-top: 140rpx;
 }
 .goods_content {
   display: flex;
@@ -13,39 +18,93 @@ swiper {
   background: white;
   padding: 30rpx 30rpx 0 30rpx;
 }
-.content {
+.contentInfo {
   width: 79%;
   line-height: 1.6;
 }
 .goods_title {
-  font-size: 34rpx;
+  font-size: 38rpx;
+  font-weight: 800;
+  margin-bottom: 10rpx
 }
 .goods_brief {
-  font-size: 24rpx;
-  color: #7f7f7f;
+  font-size: 28rpx;
+  color: grey;
+}
+.goods_inner{
+  display: flex;
+  align-items: center;
+  width: 70%;
+}
+.goods_icon{
+  font-size: 25rpx;
+  color: red;
 }
 .goods_price {
   font-size: 40rpx;
-  color: #c13431;
-  /*font-weight: bold;*/
+  color: red;
+  margin-bottom: 10rpx;
+}
+.food-numb{
+  height: 40rpx;
+  width: 130rpx;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 10rpx;
+  line-height: 40rpx;
+  font-size: 25rpx;
+}
+.food-numb .add,.food-numb .remove{
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 30rpx;
+  text-align: center; 
+}
+.text{
+  line-height: 15rpx;
+  color: red;
+  font-size: 32rpx;
+}
+.food-numb .add{
+  font-size: 35rpx;
+  line-height: 37rpx;
+  font-weight: 700;
+  background: #33CC33;
+  margin-left: 15rpx;
+}
+.food-numb .remove{
+  margin-right: 15rpx;
+  line-height: 28rpx;
+  font-size: 60rpx;
+  font-weight: 500;
+  box-sizing: border-box;
+  border: 2rpx;
+  border-style: solid; 
+  border-color: #B0B0B0;
+  color: #B0B0B0;
 }
 .share {
   flex-shrink: 0;
   text-align: center;
   margin-top: 20rpx;
 }
-.icon-fenxiang {
-  color: #585858;
-
+.shareImg{
+  height: 40rpx;
+  width: 40rpx;
 }
 .fenxiang {
   color: #585858;
-  font-size: 24rpx;
+  font-size: 30rpx;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin-bottom: 55rpx;
 }
 .message {
   background: white;
-  padding: 0 20rpx;
-  margin-top: 20rpx;
+  font-size: 25rpx;
+  border-bottom: 2rpx solid #ECECEC;
+  border-top: 2rpx solid #ECECEC;
 }
 .goods_message {
   padding: 20rpx;
@@ -54,14 +113,80 @@ swiper {
   align-items: center;
   border-bottom: 2rpx solid #f3f3f3;
 }
+.order-title-name{
+  width: 200rpx;
+  height: 100%;
+  font-size: 30rpx;
+  margin-left: 20rpx;
+  color: grey;
+}
+.order-title-state{
+  width: 130rpx;
+  color: #fff;
+  margin-right: 20rpx;
+  font-size: 28rpx;
+  text-align: center;
+  background-color: #33cc33;
+  height: 35rpx;
+  line-height: 35rpx;
+  border-radius: 20rpx 5rpx;
+}
 .image_text {
   background: white;
-  padding: 20rpx;
-  margin-top: 20rpx;
 }
 .image_text_title {
   text-align: center;
-
+  font-size: 40rpx;
+  font-weight: 800;
+  padding-top: 10rpx;
+}
+.info{
+  font-size: 30rpx;
+  color: grey;
+  margin-left: 30rpx;
+}
+.order-content{
+  padding: 20rpx;
+  display: flex;
+  align-items: center;
+  border-bottom: 1rpx solid #ECECEC; 
+}
+.order-content-info-name{
+  font-size: 35rpx;
+  margin-left: 10rpx;
+  font-weight: 800;
+}
+.order-content-restaurantImg{
+  width: 200rpx;
+  height: 125rpx;
+}
+.order-content-info{
+  height: 125rpx;
+  font-size: 25rpx;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10rpx;
+}
+.order-content-info-price{
+  color: #33CC33;
+  font-size: 25rpx;
+  margin-top: 10rpx;
+  margin-left: 10rpx;
+}
+.order-content-info-date{
+  margin: 10rpx;
+}
+.pay{
+  height: 70rpx;
+  width: 200rpx;
+  text-align: center;
+  line-height: 70rpx;
+  color: white;
+  font-size: 30rpx;
+  background: #33CC33;
+  margin-right: 20rpx;
+  border-radius: 150rpx;
 }
 /*底部导航*/
 .footer_nav {
@@ -101,4 +226,161 @@ swiper {
 }
 .now_buy {
   background: #ad0e12;
+}
+/* 购物车 */
+.shopping-cart-bg{
+  background-color: #fff;
+  height: 160rpx;
+  z-index: 8;
+  position: fixed;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+.shopping-cart {
+  z-index: 9;
+  position: fixed;
+  height: 120rpx;
+  bottom: 18rpx;
+  margin: 0 30rpx;
+  right: 0;
+  left: 0;
+  border-radius: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  border: 2rpx solid rgba(236, 236, 236, 1);
+}
+
+.shopping-cart .left-box {
+  display: flex;
+  margin-left: 48rpx;
+  align-items: center;
+  width: 60%;
+}
+
+.shopping-cart .left-box .icon-wrap {
+  position: relative;
+}
+
+.shopping-cart .left-box .icon-wrap .icon-card {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.shopping-cart .left-box .icon-wrap .icon-num {
+  font-size: 32rpx;
+  min-width: 35rpx;
+  padding: 0 5rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  background-color: #33CC33;
+  position: absolute;
+  border-radius: 40rpx;
+  top: -16rpx;
+  right: -24rpx;
+  text-align: center;
+  color: #fff;
+}
+
+.shopping-cart .left-box .price {
+  color: red;
+  font-size: 36rpx;
+  margin-left: 45rpx;
+}
+
+.shopping-cart .right-box {
+  font-size: 32rpx;
+  width: 196rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: #33CC33;
+  border-radius: 44rpx;
+  text-align: center;
+  color: #4a4a4a;
+  margin-right: 10rpx;
+}
+
+/* 购物车详情 */
+.mask {
+  z-index: 0;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.cart-details .content {
+  padding: 0 30rpx;
+  z-index: 5;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  box-shadow: 0px -4rpx 20rpx 0rpx rgba(0, 0, 0, 0.11);
+}
+
+.cart-details .content .title {
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2rpx solid #eee;
+}
+
+.cart-details .content .title .left-box {
+  font-size: 28rpx;
+  color: #4a4a4a;
+}
+
+.cart-details .content .title .right-box {
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+  color: #9b9b9b;
+}
+
+.cart-details .content .title .right-box image {
+  width: 44rpx;
+  height: 44rpx;
+  margin-left: 18rpx;
+}
+
+.cart-details .content .item-wrap {
+  padding-bottom: 150rpx;
+  max-height: 600rpx;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.cart-details .content .item-wrap .item {
+  font-size: 32rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  color: #4a4a4a;
+}
+
+.cart-details .content .item-wrap .item .goods-name {
+  flex: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cart-details .content .item-wrap .item .goods-price {
+  color: red;
+  flex: 2;
+  text-align: right;
+}
+
+.cart-details .content .item-wrap .item .num-wrap {
+  flex: 4;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }

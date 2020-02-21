@@ -12,7 +12,7 @@
     "pages/productDetail/productDetail",
     "pages/map/map",
     "pages/menu/menu",
-    "pages/location/location",
+    "pages/comment/comment",
     "pages/pay/pay",
     "pages/orderDetail/orderDetail",
     "pages/shopOrder/shopOrder"

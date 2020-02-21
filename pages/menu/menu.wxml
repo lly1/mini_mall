@@ -19,10 +19,10 @@
   <swiper class="swiper" current="{{currentPage}}"
   bindchange="turnTitle">
     <swiper-item id="orderPage">
-      <template is="categoryPage" data="{{categoryList,cartList,basePath,cartStatus,selected,cost}}"/>
+      <template is="categoryPage" data="{{categoryList,cartList,basePath,cartStatus,selected,cost,buyTotal}}"/>
     </swiper-item>
     <swiper-item id="commentPage">
-      <template is="commentPage" data="{{categoryList}}"/>
+      <template is="commentPage" data="{{commentList,basePath,shop}}"/>
     </swiper-item>
   </swiper>
 </view>

@@ -53,7 +53,7 @@ Page({
     console.info(e)
     if(app.globalData.userInfo){
       wx.navigateTo({
-        url: '/pages/menu/menu?shopId='+e.currentTarget.dataset.id,
+        url: '/pages/menu/menu?shopId='+e.currentTarget.dataset.shopid,
       });
     }else{
       wx.showModal({
@@ -202,7 +202,6 @@ Page({
         }
       })
     }
-    
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

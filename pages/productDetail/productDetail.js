@@ -1,45 +1,224 @@
-// pages/location/location.js
+var app = getApp();
+var util = require('../../utils/util.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    is_shoucang:0,
-    goods_info: { goods_id: 1, goods_title: "商品标题1", goods_price: '100', goods_yunfei: 0, goods_kucun: 100, goods_xiaoliang: 1, content:'商品介绍详情商品介绍详情商品介绍详情商品介绍详情商品介绍详情商品介绍详情商品介绍详情'},
-    goods_img: [
-      {'img': 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'},
-      {'img': 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg' },
-      {'img': 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg' },
-      {'img': 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg' },
-      ],
-    indicatorDots: true,
-    autoplay: true,
-    interval: 5000,
-    duration: 1000,
-    pjDataList: [{ headpic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', author: '张三', add_time: '2018-06-01', content:'好评好评，真实太好了!'},
-      { headpic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', author: '张三', add_time: '2018-06-01', content: '好评好评，真实太好了!' }
-    ],//评价数据
+    basePath: app.basePath,
+    shopId: '',
+    shop: '',
+    product:'',
+    cartList:[],
+    cartStatus: false,
+    cost: 0,
+    buyTotal: 0,
+    longitude: '',
+    latitude: ''
   },
-  previewImage: function (e) {
-    var current = e.target.dataset.src;
-    var href = this.data.imghref;
-    var goodsimg = this.data.goods_img;
-    var imglist = [];
-    for (var i = 0; i < goodsimg.length; i++) {
-      imglist[i] = href + goodsimg[i].img
+  addToCart: function (e) {
+    var that = this;
+    var productId = that.data.product.id;
+    var buyNum = that.data.product.cart;
+    var cartId = '';
+    if(buyNum){
+      cartId = buyNum.id;
+      buyNum = buyNum.buyNum+1;
+    }else{
+      buyNum = 1;
     }
-    wx.previewImage({
-      current: current, // 当前显示图片的http链接  
-      urls: imglist// 需要预览的图片http链接列表  
+    util.requestUrl({
+      url: '/api/cart/saveCart',
+      params: {
+        id: cartId,
+        userId: app.globalData.userInfo.id,
+        shopId: that.data.shopId,
+        productId: productId,
+        buyNum: buyNum
+      },
+      method: "POST"
+    })
+    .then(res => {
+      console.info(res)
+      that.data.product.cart = res.data
+      that.setData({
+        product: that.data.product
+      })
+      that.getCart();
     })
   },
-
+  removeFromCart: function (e) {
+    var that = this;
+    var buyNum = that.data.product.cart;
+    var cartId = '';
+    if(buyNum){
+      cartId = buyNum.id;
+      buyNum = buyNum.buyNum-1;
+    }else{
+      buyNum = 1;
+    }
+    util.requestUrl({
+      url: '/api/cart/delCart',
+      params: {
+        id: cartId,
+        buyNum: buyNum
+      },
+      method: "POST"
+    })
+    .then(res => {
+      console.info(res)
+      if(buyNum == 0){
+        that.data.product.cart = null
+      }else{
+        that.data.product.cart = res.data
+      }
+      that.setData({
+        product: that.data.product
+      })
+      that.getCart();
+    })
+  },
+  clearCart: function(){
+    var that = this;
+    util.requestUrl({
+      url: '/api/cart/delAllCart',
+      params: {
+        userId: app.globalData.userInfo.id,
+        shopId: that.data.shopId,
+      },
+      method: "POST"
+    })
+    .then(res => {
+      console.info(res)
+      if(res.data == "success"){
+        that.data.categoryList.forEach(function (v, i) {
+          v.shopProducts.forEach(function (item,index){
+            item.cart = null
+          })
+        })
+        that.setData({
+          categoryList: that.data.categoryList,
+          cartList: null
+        })
+      }else{
+        wx.showToast({
+          title: '清空失败',
+          icon: '/images/system/error.png',
+          duration: 2000
+        })
+      }
+      that.getCart();
+    })
+  },
+  getCart: function(){
+    var that = this;
+    util.requestUrl({
+      url: '/api/cart/getCart',
+      params: {
+        shopId: that.data.shop.id,
+        userId: app.globalData.userInfo.id
+      },
+      method: "POST"
+    })
+    .then(res => {
+      console.info(res)
+      if(res.data){
+        var cost = 0;
+        var buyTotal = 0;
+        res.data.forEach(function (v, i) {
+            cost += v.product.productPrice * v.buyNum
+            buyTotal += v.buyNum
+        })
+        that.setData({
+          cartList: res.data,
+          cost: cost,
+          buyTotal: buyTotal
+        }) 
+      }
+    })
+  },
+// 显示隐藏购物车详情
+changeCartStatus() {
+  this.setData({
+    cartStatus: !this.data.cartStatus
+  })
+},
+ // 确认订单
+ goSureOrder() {
+  var that = this;
+  if (that.data.cartList.length < 1) {
+    wx.showToast({
+      title: '请选择商品',
+      icon: '/images/system/error.png',
+      duration: 2000
+    })
+    return
+  }
+  util.requestUrl({
+    url: '/api/order/createOrder',
+    params: {
+      shopId: that.data.shopId,
+      userId: app.globalData.userInfo.id,
+      payTotal: that.data.cost
+    },
+    method: "POST"
+  })
+  .then(res => {
+    console.info(res)
+    if(res.success){
+      wx.navigateTo({
+        url: '/pages/pay/pay?orderId='+res.data.id
+      })
+    }else{
+      wx.showToast({
+        title: '创建订单失败',
+        icon: '/images/system/error.png',
+        duration: 2000
+      })
+    }     
+  })
+},
+goShop(){
+  wx.navigateBack({
+    delta: 1
+  })
+},
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that = this;
+    var product = JSON.parse(options.product);
+    wx.getLocation({
+      type: 'gcj02',
+      altitude: false,
+      success: (res)=>{
+        console.info(res);
+        that.setData({ 
+          longitude: res.longitude,
+          latitude: res.latitude,
+          product: product,
+          shopId: product.shopId
+        });
+        util.requestUrl({
+          url: '/api/shop/getShopInfoById',
+          params: {
+            id: product.shopId,
+            longitude: res.longitude,
+            latitude: res.latitude
+          },
+          method: "POST"
+        })
+        .then(res => {
+          console.info(res)
+          that.setData({
+            shop: res.data
+          }) 
+          that.getCart();
+        })
+      }
+    })  
   },
 
   /**

@@ -13,7 +13,7 @@ page{
 
 .category .s-b {
   width: 50%;
-  height: 30%;
+  height: 29%;
   margin: 0 auto;
   background-color: #fff;
   margin-top: 40%;
