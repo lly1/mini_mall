@@ -14,9 +14,9 @@
     <scroll-view class="foodList" scroll-y="true">
       <view class="title">{{categoryList[selected].categoryName}}</view>
       <block wx:for="{{categoryList[selected].shopProducts}}" wx:key="">
-        <view class="food" bindtap="goDetail" data-product="{{item}}">
-          <image class="img" src="{{basePath+item.productIcon}}"></image>
-          <view class="food-info">
+        <view class="food">
+          <image class="img" src="{{basePath+item.productIcon}}" bindtap="goDetail" data-product="{{item}}"/>
+          <view class="food-info" bindtap="goDetail" data-product="{{item}}">
             <view class="name">
               {{item.productName}}
             </view>

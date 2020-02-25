@@ -16,16 +16,20 @@
     <view class="goods_content">
         <view class="contentInfo">
             <view class="goods_title">{{product.productName}}</view>
-            <view class="goods_brief">月售{{product.saleTotal}}</view>
+            <view class="goods_brief">月售{{product.saleTotal}} 赞{{product.starTotal}}</view>
             <view class="goods_inner">
                 <view class="goods_icon">￥</view>
                 <view class="goods_price">{{product.productPrice}}</view>
             </view>
         </view>
         <view class="share">
-            <view class="fenxiang">
-              <image class="shareImg" src="/images/system/share.png"/>
-              分享
+            <view class="fenxiang" bindtap="star" wx:if="{{isStar == 0}}">
+              <image class="shareImg" src="/images/system/zan_in.png"/>
+              点赞
+            </view>
+            <view class="fenxiang" bindtap="starDel" wx:else>
+              <image class="shareImg" src="/images/system/zan_out.png"/>
+              取消赞
             </view>
             <view class="food-numb">
                 <view class="remove" bindtap="removeFromCart" hidden="{{!product.cart}}" data-cartid="{{product.cart.id}}" data-index="{{index}}">

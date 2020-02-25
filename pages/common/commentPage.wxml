@@ -15,8 +15,11 @@
         <text class='userName' style='margin-left:20rpx;'>{{item.user.nickName}}</text>
       </view>
       <view class='text_detail'>{{item.content}}</view>
-      <image wx:if="{{imgUrl !==''}}" class='img' src='{{basePath+item.imgUrl}}'></image>
+      <image wx:if="{{item.imgUrl}}" class='img' src='{{basePath+item.imgUrl}}'></image>
       <view class='three_but'>
+        <view class='three_view'>
+          <text class='time'>评分：{{item.star}}</text>
+        </view>
         <view class='three_view'>
           <text class='time'>{{item.createTime}}</text>
         </view>

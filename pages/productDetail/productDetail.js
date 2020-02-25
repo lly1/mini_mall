@@ -14,6 +14,7 @@ Page({
     cartStatus: false,
     cost: 0,
     buyTotal: 0,
+    isStar: 0,
     longitude: '',
     latitude: ''
   },
@@ -136,6 +137,42 @@ Page({
           buyTotal: buyTotal
         }) 
       }
+    })
+  },
+  star: function(){
+    var that = this;
+    util.requestUrl({
+      url: '/api/shop/productStar',
+      params: {
+        productId: that.data.product.id
+      },
+      method: "POST"
+    })
+    .then(res => {
+      console.info(res)
+      that.data.product.starTotal = res.data.starTotal
+      that.setData({
+        product: that.data.product,
+        isStar: 1
+      })
+    })
+  },
+  starDel: function(){
+    var that = this;
+    util.requestUrl({
+      url: '/api/shop/productStarDel',
+      params: {
+        productId: that.data.product.id
+      },
+      method: "POST"
+    })
+    .then(res => {
+      console.info(res)
+      that.data.product.starTotal = res.data.starTotal
+      that.setData({
+        product: that.data.product,
+        isStar: 0
+      })
     })
   },
 // 显示隐藏购物车详情

@@ -433,7 +433,13 @@
 .time {
   font-size: 25rpx;
   color: #757575;
-  margin-left: 450rpx;  
 }
-
+.three_but{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+.three_view{
+  margin-right: 10rpx;
+}
 

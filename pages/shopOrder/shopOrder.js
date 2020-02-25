@@ -43,7 +43,7 @@ Page({
     util.requestUrl({
       url: '/api/order/acceptOrder',
       params: {
-        id: e.currentTarget.dataset.orderid,
+        id: e.currentTarget.dataset.orderid
       },
       method: "POST"
     })
