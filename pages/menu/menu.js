@@ -93,6 +93,55 @@ Page({
       that.getCart();
     })
   },
+  cartAdd(e){
+    var that = this;
+    var cart = e.currentTarget.dataset.cart
+    cart.buyNum =  cart.buyNum +1;
+    util.requestUrl({
+      url: '/api/cart/saveCart',
+      params: {
+        id: cart.id,
+        userId: app.globalData.userInfo.id,
+        shopId: that.data.shopId,
+        productId: cart.product.id,
+        buyNum: cart.buyNum
+      },
+      method: "POST"
+    })
+    .then(res => {
+      console.info(res)
+      that.updateCate(res.data);
+      that.getCart();
+      that.setData({
+        categoryList: that.data.categoryList
+      })
+    })
+  },
+  cartRemove(e){
+    var that = this;
+    var cart = e.currentTarget.dataset.cart
+    cart.buyNum =  cart.buyNum -1;
+    util.requestUrl({
+      url: '/api/cart/delCart',
+      params: {
+        id: cart.id,
+        buyNum: cart.buyNum
+      },
+      method: "POST"
+    })
+    .then(res => {
+      console.info(res)
+      if(res.data){
+        that.updateCate(res.data);
+      }else{
+        that.updateCate(cart);
+      }
+      that.getCart();
+      that.setData({
+        categoryList: that.data.categoryList
+      })
+    })
+  },
   clearCart: function(){
     var that = this;
     util.requestUrl({
@@ -123,6 +172,19 @@ Page({
         })
       }
       that.getCart();
+    })
+  },
+  updateCate(cart){
+    this.data.categoryList.forEach(function(v,i){
+      v.shopProducts.forEach(function(item,index){
+        if(item.cart.id == cart.id){
+          if(cart.buyNum!=0){
+            item.cart = cart
+          }else{
+            item.cart = null
+          }
+        }
+      })
     })
   },
   turnPage: function (e) {

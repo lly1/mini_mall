@@ -76,7 +76,7 @@
           <view class='goods-price'>￥{{item.product.productPrice*item.buyNum}}</view>
           <view class='num-wrap'>
             <view class="food-numb">
-              <view class="remove" bindtap="removeFromCart" hidden="{{!item}}" data-cartid="{{item.id}}" data-index="{{index}}">
+              <view class="remove" bindtap="cartRemove" hidden="{{!item}}" data-cart="{{item}}" data-index="{{index}}">
                   -
               </view>
               <text class="text" wx:if="{{item.buyNum>0}}">
@@ -85,7 +85,7 @@
               <text class="text" wx:else>
                 0
               </text>
-              <view class="add" bindtap="addToCart" data-productid="{{item.product.id}}" data-index="{{index}}">
+              <view class="add" bindtap="cartAdd" data-cart="{{item}}" data-index="{{index}}">
                   +
               </view>
             </view>
