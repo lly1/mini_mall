@@ -99,3 +99,8 @@ textarea{
   width: 100%;
   padding: 32rpx;
 }
+.add-li{
+  width:30%; 
+  margin-right:20rpx; 
+  margin-left: 0;
+}

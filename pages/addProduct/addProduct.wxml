@@ -1,65 +1,82 @@
-
 <!--商品发布-->
 <form bindsubmit="saveProduct">
-  <!--上传图片-->
-  <view class="log">
-    <view class="log_s">商品图片：</view>
-    <view class="log_o"> </view>
-    <view class="log_g">
-      <block wx:if="{{iconShow}}">
-        <view class="cl_img">
-          <image src="{{iconShow}}" mode="aspectFit"  bindtap="icon"></image>
-        </view>
-      </block>
-      <block wx:else>
-        <view class="cl_img">
-          <image src="/images/system/upload.png" bindtap="icon"></image>
-        </view>
-      </block>
+  <scroll-view scroll-y="true" style="height:100%;overflow-x:hidden">
+    <!--上传图片-->
+    <view class="log">
+      <view class="log_s">商品图片：</view>
+      <view class="log_o"> </view>
+      <view class="log_g">
+        <block wx:if="{{iconShow}}">
+          <view class="cl_img">
+            <image src="{{iconShow}}" mode="aspectFit"  bindtap="icon"></image>
+          </view>
+        </block>
+        <block wx:else>
+          <view class="cl_img">
+            <image src="/images/system/upload.png" bindtap="icon"></image>
+          </view>
+        </block>
+      </view>
     </view>
-  </view>
-  <view class="space"></view>
-  <!--商品名称-->
-  <view class='menu-item'>
-    <text class="l">商品名称:</text>
-    <input class="inputForm" name="name" type='text' value='{{name}}'></input>
-  </view>
-  <view class="space"></view>
-  <!--商品价格-->
-  <view class='menu-item'>
-    <text class="l">商品价格:</text>
-    <input class="inputForm" name="price" type='number' value='{{price}}'></input>
-  </view>
-  <view class="space"></view>
-  <!--商品库存-->
-  <view class='menu-item'>
-    <text class="l">商品库存:</text>
-    <input class="inputForm" name="stock" type='text' value='{{stock}}'></input>
-  </view>
-  <view class="space"></view>
-  <!--商品类别-->
-  <view class='menu-item'>
-    <text class="l">商品类别:</text>
-    <picker style="width:510rpx;" name="category" mode="selector" range="{{categoryList}}" range-key="categoryName" value="{{index}}" bindchange="category">
-      <input class="inputForm" name="category" type='text' value='{{categoryList[categoryIndex].categoryName}}' disabled='true'></input>
-    </picker>
-    <image class="next" src="/images/system/next.png"></image>
-  </view>
-  <view class="space"></view>
-  <!--商品状态-->
-  <view class='menu-item'>
-    <text class="l">商品状态:</text>
-    <picker style="width:510rpx;" name="status" mode="selector" range="{{status}}" range-key="name" value="{{statusInd}}" bindchange="status">
-        <input class="inputForm" name="status" type='text' value='{{status[statusIndex].name}}'disabled='true'></input>
-    </picker>
-    <image class="next" src="/images/system/next.png"></image>
-  </view>
-  <view class="space"></view>
-  <!--商品介绍-->
-  <view class="section">
-    <view class="jieshang" >商品介绍:</view>
-      <view  class="xian"></view>
-      <textarea placeholder-style='font-size:28rpx;' style="font-size:30rpx" maxlength='150' placeholder="请介绍你的商品(150字以内)" name="info" value="{{info}}"/>
-  </view>
-  <button style="margin-top:50rpx;" form-type="submit" hover-class='button-hover' class='location'>保存</button>
+    <view class="space"></view>
+    <!--商品名称-->
+    <view class='menu-item'>
+      <text class="l">商品名称:</text>
+      <input class="inputForm" name="name" type='text' value='{{name}}'></input>
+    </view>
+    <view class="space"></view>
+    <!--商品价格-->
+    <view class='menu-item'>
+      <text class="l">商品价格:</text>
+      <input class="inputForm" name="price" type='number' value='{{price}}'></input>
+    </view>
+    <view class="space"></view>
+    <!--商品库存-->
+    <view class='menu-item'>
+      <text class="l">商品库存:</text>
+      <input class="inputForm" name="stock" type='text' value='{{stock}}'></input>
+    </view>
+    <view class="space"></view>
+    <!--商品类别-->
+    <view class='menu-item'>
+      <text class="l">商品类别:</text>
+      <picker style="width:510rpx;" name="category" mode="selector" range="{{categoryList}}" range-key="categoryName" value="{{index}}" bindchange="category">
+        <input class="inputForm" name="category" type='text' value='{{categoryList[categoryIndex].categoryName}}' disabled='true'></input>
+      </picker>
+      <image class="next" src="/images/system/next.png"></image>
+    </view>
+    <view class="space"></view>
+    <!--商品状态-->
+    <view class='menu-item'>
+      <text class="l">商品状态:</text>
+      <picker style="width:510rpx;" name="status" mode="selector" range="{{status}}" range-key="name" value="{{statusInd}}" bindchange="status">
+          <input class="inputForm" name="status" type='text' value='{{status[statusIndex].name}}'disabled='true'></input>
+      </picker>
+      <image class="next" src="/images/system/next.png"></image>
+    </view>
+    <view class="space"></view>
+    <block wx:for="{{productComponent}}" wx:key="{{index}}">
+      <view class='menu-item'>
+        <text class="l" style="width:40%">商品成分:</text>
+        <picker style="width:510rpx;" name="component" mode="multiSelector" range-key="name" data-index="{{index}}" range="{{componentsArr}}" bindchange="components" bindcolumnchange="columnChange">
+            <input class="inputForm" name="component" type='text' value='{{item.name}}' disabled='true'></input>
+        </picker>
+        <image class="next" src="/images/system/next.png"></image>
+        <input style="padding-left:5%" placeholder="含量" data-index="{{index}}"  bindinput='inputWeight' name = "total"></input>
+        <text style="font-size:34rpx">g</text>
+      </view>
+      <view class="space"></view>
+    </block> 
+    <view class='menu-item' style="justify-content: center;">
+      <button class='add-li' bindtap='addList'>添加成分</button>
+      <button class='add-li' bindtap='delList'>删除成分</button>
+    </view>
+    <!--商品介绍-->
+    <view class="section">
+      <view class="jieshang" >商品介绍:</view>
+        <view  class="xian"></view>
+        <textarea placeholder-style='font-size:28rpx;' style="font-size:30rpx" maxlength='150' placeholder="请介绍你的商品(150字以内)" name="info" value="{{info}}"/>
+    </view>
+    <button style="margin-bottom:50rpx;" form-type="submit" hover-class='button-hover' class='location'>保存</button>
+  </scroll-view>
 </form>

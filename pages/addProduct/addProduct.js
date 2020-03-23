@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    productComponent:[{}],
     status: [{
       name: "下架",
       id: 0
@@ -21,7 +22,10 @@ Page({
     stock: '',
     icon: '',
     categoryIndex: 0,
-    statusIndex: 0
+    statusIndex: 0,
+    components:[],
+    componentsArr:[[],[]],
+    componentsIndex: [0,0]
   },
    /**
    * 生命周期函数--监听页面加载
@@ -64,16 +68,69 @@ Page({
         })
       })
     }
+    that.getComponent();
+  },
+  getComponent(){
+    var that = this;
+    util.requestUrl({
+      url: '/api/component/getComponent',
+      method: "POST"
+    })
+    .then(res => {
+      var data = res.data;
+      console.info(data)
+      for (var i = 0; i < data.length; i++) {
+        that.data.componentsArr[0].push(data[i]);
+        for (var j = 0; j < data[i].componentList.length; j++) {
+          that.data.componentsArr[1].push(data[i].componentList[j])
+        }
+      }
+      that.setData({
+        components: data,
+        componentsArr: that.data.componentsArr
+      })
+    })
   },
   category: function (e){
     this.setData({
       categoryIndex: e.detail.value
     })
-
   },
   status: function (e) {
     this.setData({
       statusIndex: e.detail.value
+    })
+  },
+  components: function (e) {
+    var index = e.detail.value;
+    console.info(index)
+    let vid = e.currentTarget.dataset.index
+    var component = this.data.componentsArr[1][index[1]];
+    var productComponent = this.data.productComponent;
+    productComponent[vid] = {...productComponent[vid],id:component.id,name:component.name};
+    this.setData({
+      componentsIndex: index,
+      productComponent
+    })
+  },
+  total: function (e) {
+    
+  },
+  columnChange: function(e){
+    var that = this;
+    that.data.componentsIndex[e.detail.column] = e.detail.value;
+    switch (e.detail.column) {
+      case 0:
+        that.data.components.forEach(item => {
+          if(item.id == that.data.componentsArr[0][e.detail.value].id){
+            that.data.componentsArr[1] = item.componentList;
+          }
+        });
+        break;
+    }
+    that.setData({
+      componentsArr: that.data.componentsArr,
+      componentsIndex: that.data.componentsIndex
     })
   },
   saveProduct: function (e) {
@@ -163,6 +220,20 @@ Page({
       }
     })
   },
+  addList: function(){
+    var productComponent = this.data.productComponent;
+    productComponent.push({});//实质是添加lists数组内容，使for循环多一次
+    this.setData({
+      productComponent: productComponent,
+    })  
+  },
+  delList: function () {
+    var productComponent = this.data.productComponent;
+    productComponent.pop();      //实质是删除lists数组内容，使for循环少一次
+    this.setData({
+      productComponent: productComponent,
+    })
+  },  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
