@@ -68,7 +68,22 @@ Page({
         })
       })
     }
+    that.getProductComponent(options.id);
     that.getComponent();
+  },
+  getProductComponent(productId){
+    var that = this;
+    util.requestUrl({
+      url: '/api/component/getProductComponent',
+      params: {productId : productId},
+      method: "POST"  
+    })
+    .then(res => {
+      var data = res.data;
+      that.setData({
+        productComponent : data
+      })
+    })
   },
   getComponent(){
     var that = this;
@@ -107,14 +122,19 @@ Page({
     let vid = e.currentTarget.dataset.index
     var component = this.data.componentsArr[1][index[1]];
     var productComponent = this.data.productComponent;
-    productComponent[vid] = {...productComponent[vid],id:component.id,name:component.name};
+    productComponent[vid] = {...productComponent[vid],componentId:component.id,componentName:component.name};
     this.setData({
       componentsIndex: index,
       productComponent
     })
   },
   total: function (e) {
-    
+    let vid = e.currentTarget.dataset.index
+    var productComponent = this.data.productComponent;
+    productComponent[vid] = {...productComponent[vid],productId:this.data.id,total:e.detail.value};
+    this.setData({
+      productComponent
+    })
   },
   columnChange: function(e){
     var that = this;
@@ -152,7 +172,8 @@ Page({
         productStock : fdata.stock,
         productInfo : fdata.info,
         productIcon : that.data.icon,
-        productStatus : that.data.status[that.data.statusIndex].id
+        productStatus : that.data.status[that.data.statusIndex].id,
+        componentList : that.data.productComponent
       },
       header: {
         'cookie': 'JSESSIONID='+ app.globalData.token

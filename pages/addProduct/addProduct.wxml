@@ -59,10 +59,10 @@
       <view class='menu-item'>
         <text class="l" style="width:40%">商品成分:</text>
         <picker style="width:510rpx;" name="component" mode="multiSelector" range-key="name" data-index="{{index}}" range="{{componentsArr}}" bindchange="components" bindcolumnchange="columnChange">
-            <input class="inputForm" name="component" type='text' value='{{item.name}}' disabled='true'></input>
+            <input class="inputForm" name="component" type='text' value='{{item.componentName}}' disabled='true'></input>
         </picker>
         <image class="next" src="/images/system/next.png"></image>
-        <input style="padding-left:5%" placeholder="含量" data-index="{{index}}"  bindinput='inputWeight' name = "total"></input>
+        <input style="padding-left:5%" placeholder="含量" data-index="{{index}}"  bindinput='total' name = "total" value="{{item.total}}"></input>
         <text style="font-size:34rpx">g</text>
       </view>
       <view class="space"></view>
