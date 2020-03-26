@@ -74,7 +74,6 @@ const requestUrl=({
  });
  let server = app.basePath;
  let token = app.globalData.token;
- that=this;
  console.info(params);
  if (token != "" && token !=null){
    var header = { 'content-type': 'application/x-www-form-urlencoded', 'Cookie': 'JSESSIONID=' + token }

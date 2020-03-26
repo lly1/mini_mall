@@ -15,7 +15,8 @@
     "pages/comment/comment",
     "pages/pay/pay",
     "pages/orderDetail/orderDetail",
-    "pages/shopOrder/shopOrder"
+    "pages/shopOrder/shopOrder",
+    "pages/pie/index"
   ],
   "window": {
     "navigationBarTitleText": "在线点餐",
