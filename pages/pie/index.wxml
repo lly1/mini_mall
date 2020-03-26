@@ -1,10 +1,10 @@
 <!--index.wxml-->
 <view class="flex-item">
   <block wx:for="{{button}}">
-    <button bindtap="changeGroup" data-id="{{item.type}}" type="{{index == type ? 'primary' : 'default'}}"> {{item.name}}</button>
+    <button bindtap="changeGroup" data-id="{{item.type}}" type="{{item.type == type ? 'primary' : 'default'}}"> {{item.name}}</button>
   </block>
 </view>
 <view class="container">
   <text class="text" wx:if="{{show}}">近期无数据</text>
-  <ec-canvas wx:if="{{!show}}" canvas-id="mychart-pie" ec="{{ ec }}"></ec-canvas>
+  <ec-canvas wx:if="{{!show}}" id = "mychart" canvas-id="mychart-pie" ec="{{ ec }}"></ec-canvas>
 </view>
