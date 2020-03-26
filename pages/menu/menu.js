@@ -177,7 +177,7 @@ Page({
   updateCate(cart){
     this.data.categoryList.forEach(function(v,i){
       v.shopProducts.forEach(function(item,index){
-        if(item.cart.id == cart.id){
+        if(item.cart && item.cart.id == cart.id){
           if(cart.buyNum!=0){
             item.cart = cart
           }else{

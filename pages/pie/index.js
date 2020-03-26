@@ -2,63 +2,83 @@ import * as echarts from '../../ec-canvas/echarts';
 
 const app = getApp();
 const util = require('../../utils/util.js')
+var chart = null
 Page({
   data: {
     ec: {
       onInit: function (canvas, width, height, dpr) {
-        const chart = echarts.init(canvas, null, {
+        chart = echarts.init(canvas, null, {
           width: width,
           height: height,
           devicePixelRatio: dpr // new
         });
         canvas.setChart(chart);
-        chart.setOption(getData());
         return chart;
       }
-    }
+    },
+    button: [{
+      type: 0,
+      name: '当日'
+    },
+    {
+      type: 1,
+      name: '近一周'
+    },
+    {
+      type: 2,
+      name: '近一月'
+    }],
+    show: false,
+    type: 0
   },
   onLoad: function (options) {
-    this.echartsComponnet = this.selectComponent('#chart');
-    this.getData(); //获取数据
+    this.getData();
+  },
+  getData(){
+    var that = this;
+    util.requestUrl({
+      url: '/api/component/getUserComponent',
+      params: {type: that.data.type},
+      method: "POST"
+    })
+    .then(res => {
+      if(!res.data){
+        that.setData({
+          show: true
+        })
+      }else{
+        chart.setOption({
+          tooltip: {
+            trigger: 'item',
+            formatter: '{b}: {c} ({d}%)'
+          },
+          legend: {
+            orient: 'vertical',
+            left: 10,
+            data: ['蛋白质', '脂肪', '碳水化合物', '卡路里', '无机盐','钙','磷','铁']
+          },
+          backgroundColor: "#ffffff",
+          color: ['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3'],
+          series: [{
+            label: {
+              normal: {
+                fontSize: 14
+              }
+            },
+            type: 'pie',
+            radius: '45%',
+            data: res.data
+          }]
+        });
+      }
+    })
+  },
+  changeGroup: function(event){
+    var type = event.currentTarget.dataset.id;
+    this.setData({
+      type: type
+    });
+    this.getData();
   }
 });
-function getData(){
-  util.requestUrl({
-    url: '/api/component/getUserComponent',
-    method: "POST"
-  })
-  .then(res => {
-    console.info(res)
-  })
-  var option = {
-    backgroundColor: "#ffffff",
-    color: ["#37A2DA", "#32C5E9", "#67E0E3", "#91F2DE", "#FFDB5C", "#FF9F7F"],
-    series: [{
-      label: {
-        normal: {
-          fontSize: 14
-        }
-      },
-      type: 'pie',
-      center: ['50%', '50%'],
-      radius: ['40%', '60%'],
-      data: [{
-        value: 55,
-        name: '北京'
-      }, {
-        value: 20,
-        name: '武汉'
-      }, {
-        value: 10,
-        name: '杭州'
-      }, {
-        value: 20,
-        name: '广州'
-      }, {
-        value: 38,
-        name: '上海'
-      }]
-    }]
-  };
-  return option;
-}
+
