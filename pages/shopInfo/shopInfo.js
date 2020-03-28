@@ -1,5 +1,5 @@
 var app = getApp();
-var uploadFileUrl = app.basePath + "upPic";
+var uploadFileUrl = app.basePath + "/upPic";
 var util = require('../../utils/util.js')
 Page({
   data: {

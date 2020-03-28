@@ -16,7 +16,7 @@ function formatNumber(n) {
 function wxLogin(that) {
   	var js_code = wx.getStorageSync("js_code");
     wx.request({
-      url: app.basePath + "wxAuth/login",
+      url: app.basePath + "/wxAuth/login",
       data: {
         js_code: js_code
       },

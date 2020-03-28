@@ -47,7 +47,7 @@
               </view>
             </view>
           <view class="order-footer">
-            <view class="order-footer-goToComment" wx:if="{{item.orderStatus==3&&item.isRate=='0'}}" data-order="{{item}}" bindtap="goRate">去评论</view>
+            <view class="order-footer-goToComment" wx:if="{{item.orderStatus==3&&item.isRate=='0'}}" data-order="{{item}}" bindtap="goRate">去评价</view>
             <view class="order-footer-orderAgain" wx:if="{{item.orderStatus>0}}" bindtap="buyAgain" data-detail="{{item.detailList}}" data-shopid="{{item.shop.id}}">再来一单</view>
             <view class="pay" wx:if="{{item.orderStatus==0}}" bindtap='goToPay' data-orderid="{{item.id}}">去支付</view>
             <view class="order-footer-orderAgain" wx:if="{{item.orderStatus==2}}" bindtap="showCode" data-rtncode="{{item.rtnCode}}">取货号</view>
