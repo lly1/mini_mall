@@ -42,7 +42,7 @@
     <view class="orderList">
       <view class="order-title">
         <image class="order-restaurantImg"src="{{basePath+order.shop.shopLogo}}"></image>
-        <navigator url="/pages/menu/menu?shopId=" class="content">
+        <navigator url="/pages/menu/menu?shopId={{order.shop.id}}" class="content">
           <view class="order-title-restaurantName">
             {{order.shop.shopName}}
           </view>
