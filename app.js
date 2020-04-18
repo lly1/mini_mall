@@ -13,5 +13,4 @@ App({
   },
   //basePath: "http://localhost:8080",
   basePath: "http://mall.wakakaljh.top",
-
 })

@@ -1,0 +1,48 @@
+<view>
+     <view>
+        <view class="weui-search-bar">
+            <view class="weui-search-bar__form">
+            <!-- 搜索框 -->
+                <view class="weui-search-bar__box">
+                    <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                    <input type="text" class="weui-search-bar__input" bindinput="getInput" placeholder="请输入店铺名称"/>
+                </view>
+            </view>
+            <!-- 搜索按钮,调用搜索查询方法 -->
+            <view class="weui-search-bar__cancel-btn" bindtap='goSearch'>搜索</view>
+        </view>
+    </view>
+</view>
+<scroll-view  scroll-y="true" style="height:100%;overflow-x:hidden">
+    <text class="text" wx:if="{{show}}">没有找到对应店铺</text>
+    <view class="shopList" hidden="{{hide}}">
+        <block wx:for="{{shopList}}" wx:key="">
+        <view bindtap="jump" data-shopid="{{item.id}}">
+            <view class="shop-list">
+            <view class="shop-info-image">
+                <image src="{{basePath+item.shopLogo}}" class="shop-image"/>
+            </view>
+            <view class="shop-info">
+                <view class="shop-info-name">{{item.shopName}}</view>
+                <view class="shop-info-rating">
+                <view class="shop-info-rating-stars">评分：{{item.shopStar}}</view>
+                </view>
+                <view class="shop-info-rating-sales">
+                    月售 {{item.shopSale}}单
+                </view>
+            </view>
+            <view class="shop-distribution">
+            <view 
+            class="shop-distribution-distance">
+                {{item.distance}}km
+            </view>
+            <view 
+            class="shop-distribution-time">
+                每单约{{item.sellTime}}分钟
+            </view>
+            </view>
+        </view>
+        </view>
+        </block>
+    </view>
+  </scroll-view>

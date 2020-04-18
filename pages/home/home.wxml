@@ -1,6 +1,6 @@
 <import src = "../common/sort_list.wxml"/>
 <wxs module="filters" src="../../filter/filters.wxs"></wxs>
-<scroll-view bindscrolltolower="lower" class="scroll-shop-list" scroll-y="true" style="height:100%;overflow-x:hidden">
+<scroll-view bindscrolltolower="lower"  scroll-y="true" style="height:100%;overflow-x:hidden">
   <view class="heard">
     <navigator url="/pages/map/map">
       <view class="heard-location">
@@ -9,10 +9,10 @@
         <text class="heard-location-text">{{location}}</text>
       </view>
     </navigator>
-    <view class="heard-search">
+    <navigator class="heard-search" url="/pages/search/search">
       <image src="/images/search.png" class="heard-search-icon"/>
       鸡排
-    </view>
+    </navigator>
   </view>
   <swiper class="photoShow" indicator-dots="true" indicator-color="rgba(228,228,228,1)" indicator-active-color="#FECA49" autoplay="{{true}}">
     <swiper-item>
@@ -24,7 +24,7 @@
   </swiper>
   <view class="header-title">附近商家</view>
   <template is="sort_list" data="{{selected}}"/>
-    <view class="shopList">
+  <view class="shopList">
     <block wx:for="{{shopList}}" wx:key="">
       <view bindtap="jump" data-shopid="{{item.id}}">
         <view class="shop-list">
@@ -50,7 +50,7 @@
             每单约{{item.sellTime}}分钟
           </view>
         </view>
-       </view>
+      </view>
       </view>
     </block>
   </view>

@@ -37,9 +37,10 @@ Page({
       type: 'gcj02',
       altitude: false,
       success: (res)=>{
-        console.info(res);
         const la = res.latitude;
         const lo = res.longitude;
+        wx.setStorage({key: 'longitude',data: lo});
+        wx.setStorage({key: 'latitude',data: la});
         qqmapsdk.reverseGeocoder({
           location:{
             latitude: la,

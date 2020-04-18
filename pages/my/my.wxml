@@ -42,7 +42,7 @@
       </navigator>
     </block>
     <view class="space"></view>
-    <navigator url="/pages/comment/comment">
+    <navigator url="/pages/search/search">
         <view class="menu-item">
           <view class="l">帮助和反馈</view>
           <image class="next" src="/images/system/next.png"></image>
