@@ -1,5 +1,5 @@
 var app = getApp();
-var uploadFileUrl = app.basePath + "upPic";
+var uploadFileUrl = app.basePath + "/upPic";
 var util = require('../../utils/util.js')
 Page({
   /**
@@ -8,11 +8,11 @@ Page({
   data: {
     productComponent:[{}],
     status: [{
-      name: "下架",
-      id: 0
-    }, {
       name: "上架",
       id: 1
+    },{
+      name: "下架",
+      id: 0
     }],
     categoryList: [],
     id: '',

@@ -57,9 +57,8 @@ Page({
       return;
     }
     else {
-      var that = this
       util.requestUrl({
-        url: 'api/user/businessRegister',
+        url: '/api/user/businessRegister',
         params: {
           id: app.globalData.userInfo.id,
           phone: phone
