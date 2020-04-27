@@ -20,7 +20,7 @@
     "pages/pie/index"
   ],
   "window": {
-    "navigationBarTitleText": "在线点餐",
+    "navigationBarTitleText": "在线商城",
     "navigationBarTextStyle": "white",
     "navigationBarBackgroundColor": "#33CC33"
   },

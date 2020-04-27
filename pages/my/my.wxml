@@ -36,7 +36,7 @@
       <view class="space"></view>
       <navigator url="/pages/pie/index">
         <view class="menu-item">
-          <view class="l">摄入营养分析</view>
+          <view class="l">商品营养分析</view>
           <image class="next" src="/images/system/next.png"></image>
         </view>
       </navigator>
