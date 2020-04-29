@@ -148,7 +148,6 @@
 .order-title-state{
   width: 130rpx;
   color: #fff;
-  margin-right: 20rpx;
   font-size: 28rpx;
   text-align: center;
   background-color: #33cc33;

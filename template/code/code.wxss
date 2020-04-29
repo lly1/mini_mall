@@ -13,7 +13,7 @@ page{
 
 .category .s-b {
   width: 50%;
-  height: 29%;
+  height: 420rpx;
   margin: 0 auto;
   background-color: #fff;
   margin-top: 40%;
@@ -24,7 +24,7 @@ page{
   text-align: center;
   width: 80%;
   margin: 0 auto;
-  padding-top: 20px;
+  padding-top: 80rpx;
 }
 .category .s-b .s-l-b text {
   font-size: 32rpx;

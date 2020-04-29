@@ -55,6 +55,23 @@ Page({
       that.getOrder();
     })
   },
+  refuse: function (e){
+    var that = this;
+    util.requestUrl({
+      url: '/api/order/refuseOrder',
+      params: {
+        id: e.currentTarget.dataset.orderid
+      },
+      method: "POST"
+    })
+    .then(res => {
+      console.info(res)
+      wx.showToast({
+        title: res.data,
+      });
+      that.getOrder();
+    })
+  },
   turnPage: function (e) {
     this.setData({
       currentPage: e.currentTarget.dataset.index,

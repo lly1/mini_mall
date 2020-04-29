@@ -1,5 +1,13 @@
 <scroll-view class="container" scroll-y="true">
     <view class="orderList">
+      <view class="order-head" wx:if="{{order.orderStatus == -1}}">
+        <view class="orderTitleName">
+          订单被拒接
+        </view>
+        <view class="orderTitle">
+          请您重新下单。
+        </view>
+      </view>
       <view class="order-head" wx:if="{{order.orderStatus == 0}}">
         <view class="orderTitleName">
           订单已提交

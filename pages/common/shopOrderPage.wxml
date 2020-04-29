@@ -41,6 +41,7 @@
           <view class="order-footer">
             <view class="order-footer-orderAgain" wx:if="{{item.orderStatus==2}}" data-rtncode="{{item.rtnCode}}" bindtap="showCode">取货号</view>
             <view class="pay" wx:if="{{item.orderStatus==1}}" bindtap='accept' data-orderid="{{item.id}}">接单</view>
+            <view class="order-footer-orderAgain" wx:if="{{item.orderStatus==1}}" bindtap='refuse' data-orderid="{{item.id}}">拒单</view>
           </view>
         </view>
       </view> 

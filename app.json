@@ -17,6 +17,7 @@
     "pages/orderDetail/orderDetail",
     "pages/shopOrder/shopOrder",
     "pages/search/search",
+    "pages/pass/pass",
     "pages/pie/index"
   ],
   "window": {

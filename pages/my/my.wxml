@@ -34,6 +34,13 @@
         </view>
       </navigator>
       <view class="space"></view>
+      <navigator url="/pages/pass/pass">
+        <view class="menu-item">
+          <view class="l">设置支付密码</view>
+          <image class="next" src="/images/system/next.png"></image>
+        </view>
+      </navigator>
+      <view class="space"></view>
       <navigator url="/pages/pie/index">
         <view class="menu-item">
           <view class="l">商品营养分析</view>

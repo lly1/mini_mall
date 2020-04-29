@@ -73,6 +73,7 @@
   text-align: center;
   height: 35rpx;
   line-height: 35rpx;
+  width: 45%;
 }
 .order-content{
   display: flex;

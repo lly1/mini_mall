@@ -19,6 +19,7 @@
               </view>
               <image class="next" src="/images/system/next.png"></image>
             </navigator>
+            <view class="order-title-state" wx:if="{{item.orderStatus==-1}}">订单被商家拒接</view>
             <view class="order-title-state" wx:if="{{item.orderStatus==0}}">订单已提交，请尽快支付</view>
             <view class="order-title-state" wx:if="{{item.orderStatus==1}}">订单已支付，等待商家接单</view>
             <view class="order-title-state" wx:if="{{item.orderStatus==2}}">商家已接单，请耐心等待</view>
