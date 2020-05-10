@@ -159,16 +159,9 @@ Page({
       altitude: false,
       success: (res)=>{
         console.info(res);
-        const la = res.latitude;
-        const lo = res.longitude;
-        that.setData({ 
-          longitude: lo,
-          latitude: la
-        });
         that.getShopList();
       }
     })
-    
   },
   lower: function (e){
     var that = this;

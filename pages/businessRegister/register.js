@@ -66,15 +66,23 @@ Page({
         method: "POST"
       })
       .then(res => {
-        wx.showToast({
-          title: '提交成功~',
-          icon: 'loading',
-          duration: 1000
-        })
-        app.globalData.userInfo = res.data;
-        that.setData({
-          success: true
-        })
+        if(res.success){
+          wx.showToast({
+            title: '提交成功~',
+            icon: 'loading',
+            duration: 1000
+          })
+          app.globalData.userInfo = res.data;
+          that.setData({
+            success: true
+          })
+        }else{
+          wx.showToast({
+            title: res.message,
+            icon: 'loading',
+            duration: 1000
+          })
+        }  
       })
     }
   },

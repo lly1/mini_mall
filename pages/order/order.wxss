@@ -1,9 +1,6 @@
 /* pages/order/order.wxss */
 @import "/template/code/code.wxss"; /*引入template样式*/
 /* 解决和店铺取货吗样式不一 */
-.category .s-b {
-  height: 32%;
-}
 .default{
   text-align: center;
   font-weight: 500;

@@ -20,7 +20,7 @@ Page({
     },
     suggestion: [],
     centerData: null,
-    defaultKeyword: '餐厅',
+    defaultKeyword: '果蔬',
     keyword:null
   },
    /**
@@ -98,6 +98,8 @@ Page({
             latitude: res.latitude,
             longitude: res.longitude,
           })
+          wx.setStorage({key: 'longitude',data: res.longitude});
+          wx.setStorage({key: 'latitude',data: res.latitude});
           that.getAddress(res.latitude,res.longitude);
           that.nearby_search();
         }
