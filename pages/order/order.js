@@ -94,6 +94,8 @@ Page({
   },
   turnPage: function (e) {
     this.setData({
+      pageNo: 1,
+      more:1,
       currentPage: e.currentTarget.dataset.index,
       orderList: []
     })
@@ -102,6 +104,8 @@ Page({
   turnTitle: function (e) {
     if(e.detail.source=="touch"){
       this.setData({
+        pageNo: 1,
+        more:1,
         currentPage: e.detail.current,
         orderList: []
       })
